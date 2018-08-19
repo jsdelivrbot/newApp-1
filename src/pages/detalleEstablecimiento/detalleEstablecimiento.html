@@ -1,0 +1,40 @@
+<!-- -->
+<ion-header>
+  <ion-navbar color="azulc">
+    <ion-title>
+      <span ion-text>Detalle</span>
+    </ion-title>
+  </ion-navbar>
+
+  <!--  -->
+  <!--   <ion-toolbar padding color="primary">
+    <p ion-text no-margin class="text-white">
+      Esperando respuesta de cobertec
+    </p>
+  </ion-toolbar> -->
+
+</ion-header>
+
+<ion-content padding class="trips detail-bg" text-center>
+
+  <ion-card>
+    <img src="../../assets/img/portada-clinica.jpg" />
+    <ion-card-content>
+      <ion-card-title>
+        {{this.datos.NOMBRE}}
+        <p style="padding-top: 5px;"><ion-icon style="color: rgb(138, 22, 22);" name="md-pin" item-start></ion-icon> {{this.datos.DIRECCION}}</p>
+      </ion-card-title>
+      <ion-list>
+        <button ion-item  class="text-azulc">
+          <ion-icon style="color: green;" name="md-call" item-start></ion-icon>
+          {{this.datos.TELEFONO}}
+        </button>
+        <button (click)="launch()" style="border-bottom: 0px;" ion-item class="text-azulc">
+          <ion-icon style="transform: rotate(30deg);" name="md-navigate" item-start></ion-icon>
+          INDICACIONES
+        </button>
+      </ion-list>
+    </ion-card-content>
+  </ion-card>
+
+</ion-content>

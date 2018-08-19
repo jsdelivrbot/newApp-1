@@ -1,0 +1,49 @@
+<!-- -->
+<ion-content padding class="animated fadeIn login auth-page">
+  <div class="login-content">
+
+    <!-- Logo -->
+    <div padding-horizontal text-center class="animated fadeInDown">
+      <div class="logo"></div>
+      <h2 ion-text class="text-azulc">
+        <strong>Cobertec</strong> Salud
+      </h2>
+    </div>
+
+    <!-- Login form -->
+    <form class="list-form">
+      <ion-item>
+        <ion-label floating class="text-azulc">
+          <ion-icon name="mail" item-start class="text-azulc"></ion-icon>
+          DNI
+        </ion-label>
+        <ion-input type="text" [(ngModel)]="data.dni" name="data.dni"></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label floating class="text-azulc">
+          <ion-icon name="lock" item-start class="text-azulc"></ion-icon>
+          N° Socio
+        </ion-label>
+        <ion-input type="password" [(ngModel)]="data.nafiliado" name="data.nafiliado"></ion-input>
+      </ion-item>
+    </form>
+
+    <p text-right ion-text class="text-azulc" tappable (click)="forgotPass()"><strong>Olvidó su contraseña?</strong></p>
+
+    <div>
+      <button ion-button icon-start block color="dark" tappable (click)="login()">
+        <ion-icon name="log-in"></ion-icon>
+        INGRESAR
+      </button>
+
+    </div>
+
+
+    <!-- Other links -->
+    <div text-center margin-top>
+      <span ion-text class="text-azulc" tappable (click)="register()">¿No tienes cuenta? <strong>Ingresa como invitado</strong></span>
+    </div>
+
+  </div>
+</ion-content>

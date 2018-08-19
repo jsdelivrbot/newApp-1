@@ -1,0 +1,30 @@
+<!-- -->
+<ion-header style="background-color: #017ab3 !important;">
+  <ion-navbar style="background-color: #017ab3 !important;" color="azulc">
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>
+      <strong>Seleccionar Localidad</strong>
+    </ion-title>
+    <ion-buttons end>
+      <button ion-button tappable (click)="presentNotifications($event)">
+        <ion-icon name="notifications"></ion-icon>
+      </button>
+      <button ion-button tappable (click)="goToAccount()">
+        <ion-icon name="cog"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+
+<ion-content class="animated fadeIn common-bg">
+  <ion-searchbar placeholder="Buscar.." [(ngModel)]="search.LOCALIDAD" (ionInput)="Filtrar()" style="width: 100%;">
+
+  </ion-searchbar>
+  <ion-list>
+    <button ion-item class="text-azulc" *ngFor="let x of localidadesFiltradas" (click)="goClinicas(x.LOCALIDAD)">
+      {{x.LOCALIDAD}}
+    </button>
+  </ion-list>
+</ion-content>

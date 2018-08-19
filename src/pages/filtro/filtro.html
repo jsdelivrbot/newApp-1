@@ -1,0 +1,14 @@
+<ion-list class="no-margin">
+  <ion-list-header class="no-margin">
+  	<ion-icon name="md-funnel" color="primary"></ion-icon>
+  	<span ion-text color="primary" class="bold">FILTRAR</span>
+  </ion-list-header>
+  <button ion-item class="text-1x" tappable (click)="accionar('LOCALIDAD')">
+  	<ion-icon name="md-pin" color="secondary"></ion-icon>
+  	<span ion-text color="secondary">Por localidad</span>
+  </button>
+  <button ion-item class="text-1x" tappable (click)="accionar('NOMBRE')">
+  	<ion-icon name="md-quote" color="secondary"></ion-icon>
+  	<span ion-text color="secondary">Por nombre</span>
+  </button>
+</ion-list>

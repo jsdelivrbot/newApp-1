@@ -1,0 +1,15 @@
+TO MODIFY:
+
+- En turno clínico y especialista, agregar que envíe el rango horario elegido.
+- Pedir que joaquin envie el nombre del afiliado en el token.
+
+
+TO DO:
+
+- Crear las solicitudes para estudio.
+- Listado de Clínicas.
+- Listado de Farmacias.
+- Listado de Particulares.
+- Contacto.
+- Chatea con Nosotros.
+- Invitar a un amigo.

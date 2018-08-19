@@ -1,0 +1,40 @@
+<!-- -->
+<ion-header style="background-color: #017ab3 !important;">
+  <ion-navbar style="background-color: #017ab3 !important;" color="azulc">
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>
+      <strong>Seleccionar Clínica/Particular</strong>
+    </ion-title>
+    <ion-buttons end>
+      <button ion-button tappable (click)="presentNotifications($event)">
+        <ion-icon name="notifications"></ion-icon>
+      </button>
+      <button ion-button tappable (click)="goToAccount()">
+        <ion-icon name="cog"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+
+<ion-content class="animated fadeIn common-bg">
+  <ion-searchbar placeholder="Buscar.." [(ngModel)]="search.NOMBRE" (ionInput)="Filtrar()" style="width: 100%;">
+  </ion-searchbar>
+  <ion-list>
+    <button ion-item (click)="goTurno(x)" class="text-azulc" *ngFor="let x of clinicasFiltradas">
+      <ion-row justify-content-center align-items-center>
+        <ion-col col-4>
+          <img src="../assets/img/clinica.png" style="width: 50px; height: 50px;">
+        </ion-col>
+        <ion-col col-8>
+          <p>
+            <strong class="text-azulc" style="font-size: 15px;">{{x.NOMBRE}}</strong>
+          </p>
+          <p>{{x.DIRECCION}}</p>
+        </ion-col>
+      </ion-row>
+    </button>
+  </ion-list>
+
+</ion-content>

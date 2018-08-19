@@ -1,0 +1,46 @@
+<!-- -->
+<ion-header style="background-color: #017ab3 !important;">
+    
+  <ion-navbar style="background-color: #017ab3 !important;" color="azulc">
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>
+      <strong>Turnos Pendientes</strong>
+    </ion-title>
+    <ion-buttons end>
+      <button ion-button tappable (click)="presentNotifications($event)">
+        <ion-icon name="notifications"></ion-icon>
+      </button>
+      <button ion-button tappable (click)="goToAccount()">
+        <ion-icon name="cog"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding class="animated fadeIn common-bg">
+  <ion-refresher (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+  <div *ngIf="t_pendientes != undefined">
+    <ion-card *ngFor="let x of t_enespera" (click)="detallar(x)" no-margin margin-bottom class="full-width">
+      <ion-item tappable class="border-bottom">
+        <ion-icon name="notifications" style="font-size: 400%;" class="animate-me" item-left></ion-icon>
+        <strong class="text-azulc">{{x.CLINICA}}</strong>
+        <p style="padding-top: 5px;">Dirección: {{x.DIRECCION}}</p>
+        <p style="padding-top: 5px;">Especialidad: {{x.ESP}}</p>
+      </ion-item>
+    </ion-card>
+  </div>
+
+  <ion-card *ngFor="let x of t_pendientes" (click)="detallar(x)" no-margin margin-bottom class="full-width">
+    <ion-item tappable class="border-bottom">
+      <ion-icon name="clock" style="font-size: 400%;" class="text-azulc" item-left></ion-icon>
+      <strong class="text-azulc">{{x.CLINICA}}</strong>
+      <p style="padding-top: 5px;">Dirección: {{x.DIRECCION}}</p>
+      <p style="padding-top: 5px;">Especialidad: {{x.ESP}}</p>
+      <p style="padding-top: 5px;">Fecha: {{x.FECHAS}}</p>
+    </ion-item>
+  </ion-card>
+</ion-content>

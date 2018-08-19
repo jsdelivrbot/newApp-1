@@ -1,0 +1,93 @@
+<ion-menu side="left" id="authenticated" [content]="content">
+  <ion-header>
+    <ion-toolbar class="user-profile">
+
+      <ion-grid>
+        <ion-row>
+          <ion-col col-4>
+            <div class="user-avatar">
+              <img src="../assets/img/avatar.png">
+            </div>
+          </ion-col>
+          <ion-col padding-top col-8>
+            <h2 ion-text class="no-margin bold text-white">
+              Nombre
+            </h2>
+            <span ion-text color="light">{{nafiliado}}</span>
+          </ion-col>
+        </ion-row>
+
+        <ion-row no-padding class="other-data">
+          <ion-col no-padding class="column">
+            <button ion-button icon-left small full color="light" menuClose disabled>
+              <ion-icon name="contact"></ion-icon>
+              Edit Profile
+            </button>
+          </ion-col>
+          <ion-col no-padding class="column">
+            <button ion-button icon-left small full color="light" menuClose (click)="logout()">
+              <ion-icon name="log-out"></ion-icon>
+              Cerrar Sesión
+            </button>
+          </ion-col>
+        </ion-row>
+
+      </ion-grid>
+
+    </ion-toolbar>
+  </ion-header>
+
+  <ion-content color="azulc">
+
+    <ion-list class="user-list">
+      <ion-list-header>
+        Cartilla
+      </ion-list-header>
+      <button ion-item menuClose class="text-1x" (click)="openPage('listaClinicas')">
+        <ion-icon item-left name="md-home" color="azulc"></ion-icon>
+        <span ion-text color="azulc">Clínicas</span>
+      </button>
+      <button ion-item menuClose class="text-1x" (click)="openPage('TurnosPendientes')">
+        <ion-icon item-left name="md-medkit" color="azulc"></ion-icon>
+        <span ion-text color="azulc">Farmacias</span>
+      </button>
+      <button ion-item menuClose class="text-1x" (click)="openPage('TurnosPendientes')">
+        <ion-icon item-left name="md-man" color="azulc"></ion-icon>
+        <span ion-text color="azulc">Particulares</span>
+      </button>
+      <ion-list-header>
+        Mis solicitudes
+      </ion-list-header>
+      <button ion-item menuClose class="text-1x" (click)="openPage('TurnosPendientes')">
+        <ion-icon item-left name="clock" color="azulc"></ion-icon>
+        <span ion-text color="azulc">Pendientes</span>
+      </button>
+      <button ion-item menuClose class="text-1x" (click)="openPage('TurnosPendientes')">
+        <ion-icon item-left name="md-checkmark" color="success"></ion-icon>
+        <span ion-text color="azulc">Confirmadas</span>
+      </button>
+      <button ion-item menuClose class="text-1x" (click)="openPage('Solicitar')">
+        <ion-icon item-left name="md-calendar" color="azulc"></ion-icon>
+        <span ion-text color="azulc">Solicitar turno</span>
+      </button>
+      <ion-list-header>
+        Cobertec
+      </ion-list-header>
+      <button ion-item menuClose class="text-1x" (click)="openPage('Chatea')">
+        <ion-icon item-left name="chatbubbles" color="azulc"></ion-icon>
+        <span ion-text color="azulc">Chatea con nosotros</span>
+      </button>
+      <button ion-item menuClose class="text-1x" (click)="openPage('Recomendar')">
+        <ion-icon item-left name="md-person-add" color="azulc"></ion-icon>
+        <span ion-text color="azulc">Recomendar a un amigo</span>
+      </button>
+      <button ion-item menuClose class="text-1x" (click)="openPage('Contacto')">
+        <ion-icon item-left name="md-call" color="azulc"></ion-icon>
+        <span ion-text color="azulc">Contacto</span>
+      </button>
+    </ion-list>
+  </ion-content>
+
+</ion-menu>
+
+<ion-nav [root]="rootPage" #content swipeBackEnabled="false"></ion-nav>

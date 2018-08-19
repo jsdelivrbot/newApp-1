@@ -1,0 +1,45 @@
+<!-- -->
+<ion-header>
+  <ion-navbar color="azulc">
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>
+      <strong>Contacto</strong>
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding class="animated fadeIn common-bg" text-center>
+
+
+  <img src="../../assets/img/dummy.jpg">
+  <ion-card style="text-align: left;">
+    <ion-card-header style="color: red;">
+      EMERGENCIAS
+    </ion-card-header>
+    <ion-list>
+      <button (click)="call('+54 11 42034645')" ion-item style="border-top: 0px;" class="text-azulc">
+        <ion-icon name="md-call" item-start></ion-icon>
+        +54 11 42034645
+      </button>
+    </ion-list>
+  </ion-card>
+
+  <ion-card style="text-align: left;">
+    <ion-card-header>
+      CONTACTO
+    </ion-card-header>
+    <ion-list>
+      <button (click)="mailto()" ion-item style="border-top: 0px;" class="text-azulc">
+        <ion-icon name="md-mail" item-start></ion-icon>
+        info@cobertec.com.ar
+      </button>
+      <button (click)="launch()" ion-item style="border-top: 0px;" class="text-azulc">
+        <ion-icon name="md-pin" item-start></ion-icon>
+        Sarmiento 640, 1°A, CABA (1041)
+      </button>
+    </ion-list>
+  </ion-card>
+
+</ion-content>

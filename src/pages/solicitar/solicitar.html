@@ -1,0 +1,61 @@
+<!-- -->
+<ion-header style="background-color: #017ab3 !important;">
+  <ion-navbar style="background-color: #017ab3 !important;" color="azulc">
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>
+      <strong>Solicitar turno</strong>
+    </ion-title>
+    <ion-buttons end>
+      <button ion-button tappable (click)="presentNotifications($event)">
+        <ion-icon name="notifications"></ion-icon>
+      </button>
+      <button ion-button tappable (click)="goToAccount()">
+        <ion-icon name="cog"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding class="animated fadeIn common-bg">
+  <ion-card (click)="popup('clinico')" no-margin margin-bottom class="full-width">
+    <ion-item tappable class="border-bottom">
+      <ion-row justify-content-center align-items-center>
+        <ion-col col-4>
+          <img src="../assets/img/doctor.png" style="width: 75px; height: 75px;">
+        </ion-col>
+        <ion-col col-8>
+          <p><strong class="text-azulc" style="font-size: 20px;">Clínico</strong></p>
+        </ion-col>
+      </ion-row>
+    </ion-item>
+  </ion-card>
+  <ion-card (click)="popup('especialista')" no-margin margin-bottom class="full-width">
+    <ion-item tappable class="border-bottom">
+      <ion-row justify-content-center align-items-center>
+        <ion-col col-8>
+            <p><strong class="text-azulc" style="font-size: 20px;">Especialista</strong></p>
+            <p style="color: rgb(214, 92, 11); padding-top: 5px;">Requiere autorización</p>
+        </ion-col>
+        <ion-col col-4>
+            <img src="../assets/img/especialista.png" style="width: 75px; height: 75px;">
+        </ion-col>
+      </ion-row>
+    </ion-item>
+  </ion-card>
+  <ion-card (click)="detallar(x)" no-margin margin-bottom class="full-width">
+    <ion-item tappable class="border-bottom">
+      <ion-row justify-content-center align-items-center>
+        <ion-col col-4>
+          <img src="../assets/img/estudio.png" style="width: 75px; height: 75px;">
+        </ion-col>
+        <ion-col col-8>
+          <p><strong class="text-azulc" style="font-size: 20px;">Estudio</strong></p>
+          <p style="color: rgb(214, 92, 11); padding-top: 5px;">Requiere autorización</p>
+        </ion-col>
+      </ion-row>
+    </ion-item>
+  </ion-card>
+
+</ion-content>
