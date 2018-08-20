@@ -18,7 +18,8 @@
 <ion-content padding class="trips detail-bg" text-center>
 
   <ion-card>
-    <img src="../../assets/img/portada-clinica.jpg" />
+    <img *ngIf="!farmacia" src="../../assets/img/portada-clinica.jpg" />
+    <img *ngIf="farmacia" src="../../assets/img/portada-farmacia.jpg" />
     <ion-card-content>
       <ion-card-title>
         {{this.datos.NOMBRE}}

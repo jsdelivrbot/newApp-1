@@ -1,0 +1,45 @@
+<!-- -->
+<ion-header style="background-color: #017ab3 !important;">
+  <ion-navbar style="background-color: #017ab3 !important;" color="azulc">
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>
+      <strong>Particulares</strong>
+    </ion-title>
+    <ion-buttons end>
+      <button ion-button tappable (click)="presentNotifications($event)">
+        <ion-icon name="md-funnel"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+
+
+<ion-content class="animated fadeIn common-bg">
+
+    <ion-select hidden id="LocalidadF" style="max-width: 100% !important; width: 100% !important;" [(ngModel)]="search.LOCALIDAD" (ionChange)="Filtrar('LOCALIDAD')" cancelText="Cancelar" okText="Filtrar" [selectOptions]="{title: 'Seleccionar Localidad'}">
+      <ion-option selected disabled value="">Localidad..</ion-option>
+      <ion-option *ngFor="let x of localidades" value="{{x}}">{{x}}</ion-option>
+    </ion-select>
+    <ion-searchbar *ngIf="flagVisible" placeholder="Buscar.." [(ngModel)]="search.NOMBRE" (ionInput)="Filtrar('NOMBRE')" style="width: 100%;">
+    </ion-searchbar>
+
+
+  <ion-list style="margin-top: 1px;">
+    <button ion-item (click)="goDetalle(x)" class="text-azulc" *ngFor="let x of clinicasFiltradas">
+      <ion-row justify-content-center align-items-center>
+        <ion-col col-4>
+          <img src="../assets/img/doctor.png" style="width: 50px; height: 50px;">
+        </ion-col>
+        <ion-col col-8>
+          <p>
+            <strong class="text-azulc" style="font-size: 15px;">{{x.NOMBRE}}</strong>
+          </p>
+          <p>{{x.DIRECCION}}</p>
+        </ion-col>
+      </ion-row>
+    </button>
+  </ion-list>
+
+</ion-content>

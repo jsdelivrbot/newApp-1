@@ -3,6 +3,8 @@ import {NavController, NavParams, AlertController, ToastController} from "ionic-
 import {TripService} from "../../services/trip-service";
 import {TripDetailPage} from "../trip-detail/trip-detail";
 import { Servicios } from '../../services/services'; 
+import { Calendar } from '@ionic-native/calendar';
+
 
 @Component({
   selector: 'detalleSolicitud',
@@ -12,12 +14,14 @@ export class DetalleSolicitud {
   // list of trips
   public trips: any;
 
-  constructor(public alerta:AlertController, public toastCtrl:ToastController, public nav: NavController, public params: NavParams, public tripService: TripService, private Servicios: Servicios) {
+  constructor(private calendar: Calendar, public alerta:AlertController, public toastCtrl:ToastController, public nav: NavController, public params: NavParams, public tripService: TripService, private Servicios: Servicios) {
     // set sample data
     this.trips = tripService.getAll();
     this.datos = this.params.get('datos');
+    this.tipo = this.params.get('tipo');
   }
   public datos;
+  public tipo;
   // view trip detail
 
   rechazarT(IDS) {
@@ -26,6 +30,36 @@ export class DetalleSolicitud {
   }
   viewDetail(id) {
     this.nav.push(TripDetailPage, {id: id});
+  }
+
+  guardarCalendario(){
+    if(this.calendar.hasWritePermission()){
+      let startDateString = this.datos.FECHAT + "T" + this.datos.HORAT;
+      let startDate = new Date(startDateString);
+      let endDateString = this.datos.FECHAT + "T" + this.datos.HORAT;
+      let endDate = new Date(endDateString);
+      this.calendar.createEventInteractively('Turno en ' + this.datos.CLINICA, this.datos.DIRECCION, 'Médico asignado: ' + this.datos.MEDICOASIGNADO, startDate, endDate).then( data => {
+        let toast = this.toastCtrl.create({
+          message: '¡El turno ha sido añadido al clanedario!',
+          duration: 5000,
+          position: 'middle',
+          cssClass: 'dark-trans',
+          closeButtonText: 'OK',
+          showCloseButton: true
+        });
+        toast.present();
+      })
+    } else {
+      let toast = this.toastCtrl.create({
+        message: 'Debe permitir el acceso al calendario.',
+        duration: 5000,
+        position: 'middle',
+        cssClass: 'dark-trans',
+        closeButtonText: 'OK',
+        showCloseButton: true
+      });
+      toast.present();
+    }
   }
 
   confirmarT(IDS){

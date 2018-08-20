@@ -7,9 +7,6 @@ TO MODIFY:
 TO DO:
 
 - Crear las solicitudes para estudio.
-- Listado de Clínicas.
-- Listado de Farmacias.
-- Listado de Particulares.
-- Contacto.
-- Chatea con Nosotros.
-- Invitar a un amigo.
+- Invitar a un amigo -> terminar.
+- Agregar LOADING al login.
+- Turnos confirmados.

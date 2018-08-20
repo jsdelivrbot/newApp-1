@@ -1,0 +1,34 @@
+<!-- -->
+<ion-header style="background-color: #017ab3 !important;">
+    
+  <ion-navbar style="background-color: #017ab3 !important;" color="azulc">
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>
+      <strong>Turnos Confirmados</strong>
+    </ion-title>
+    <ion-buttons end>
+      <button ion-button tappable (click)="presentNotifications($event)">
+        <ion-icon name="notifications"></ion-icon>
+      </button>
+      <button ion-button tappable (click)="goToAccount()">
+        <ion-icon name="cog"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding class="animated fadeIn common-bg">
+  <ion-refresher (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+  <ion-card *ngFor="let x of t_confirmados" (click)="detallar(x)" no-margin margin-bottom class="full-width">
+    <ion-item tappable class="border-bottom">
+      <ion-icon name="md-checkmark-circle-outline" style="font-size: 400%; color: #0c9e44;" item-left></ion-icon>
+      <strong class="text-azulc">{{x.CLINICA}}</strong>
+      <p style="padding-top: 5px;">Dirección: {{x.DIRECCION}}</p>
+      <p style="padding-top: 5px;">Especialidad: {{x.ESP}}</p>
+    </ion-item>
+  </ion-card>
+</ion-content>

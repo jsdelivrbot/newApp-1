@@ -1,0 +1,59 @@
+listaclinicas,
+.home {
+  ion-list {
+    border-radius: 1rem;
+    overflow: hidden;
+
+    ion-item,
+    .item:first-child,
+    .item:last-child {
+      border: none;
+    }
+
+    ion-datetime {
+      padding-left: 0;
+    }
+  }
+}
+
+.animate-me {
+  -webkit-animation: bgcolorchange 4s infinite; /* Chrome, Safari, Opera */ 
+  animation: 1s infinite bgcolorchange;
+}
+@keyframes bgcolorchange {
+  0% {
+    color: #0084c2;
+    
+  }
+  25% {
+    color: #73a05a;
+    transform: rotate(10deg);
+  }
+  50% {
+    color: #0084c2;
+  }
+  75% {
+    color: #73a05a;
+    transform: rotate(-10deg);
+  }
+  100% {
+    color: #0084c2;
+  }
+}
+/* Chrome, Safari, Opera */
+ @-webkit-keyframes bgcolorchange {
+      0%   {
+        color: #73a05a;
+      }
+      25%  {
+        color: #0084c2;
+        transform: rotate(10deg);
+      }
+      50% {
+        color: #73a05a;
+      }
+      75%  {color: #0084c2;
+        transform: rotate(-10deg);}
+      100% {color: #73a05a;
+        }
+ }

@@ -19,12 +19,6 @@
 
         <ion-row no-padding class="other-data">
           <ion-col no-padding class="column">
-            <button ion-button icon-left small full color="light" menuClose disabled>
-              <ion-icon name="contact"></ion-icon>
-              Edit Profile
-            </button>
-          </ion-col>
-          <ion-col no-padding class="column">
             <button ion-button icon-left small full color="light" menuClose (click)="logout()">
               <ion-icon name="log-out"></ion-icon>
               Cerrar Sesión
@@ -47,11 +41,11 @@
         <ion-icon item-left name="md-home" color="azulc"></ion-icon>
         <span ion-text color="azulc">Clínicas</span>
       </button>
-      <button ion-item menuClose class="text-1x" (click)="openPage('TurnosPendientes')">
+      <button ion-item menuClose class="text-1x" (click)="openPage('listaFarmacias')">
         <ion-icon item-left name="md-medkit" color="azulc"></ion-icon>
         <span ion-text color="azulc">Farmacias</span>
       </button>
-      <button ion-item menuClose class="text-1x" (click)="openPage('TurnosPendientes')">
+      <button ion-item menuClose class="text-1x" (click)="openPage('listaParticulares')">
         <ion-icon item-left name="md-man" color="azulc"></ion-icon>
         <span ion-text color="azulc">Particulares</span>
       </button>
@@ -62,7 +56,7 @@
         <ion-icon item-left name="clock" color="azulc"></ion-icon>
         <span ion-text color="azulc">Pendientes</span>
       </button>
-      <button ion-item menuClose class="text-1x" (click)="openPage('TurnosPendientes')">
+      <button ion-item menuClose class="text-1x" (click)="openPage('TurnosConfirmados')">
         <ion-icon item-left name="md-checkmark" color="success"></ion-icon>
         <span ion-text color="azulc">Confirmadas</span>
       </button>

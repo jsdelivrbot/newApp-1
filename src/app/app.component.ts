@@ -13,6 +13,10 @@ import { LoginPage } from "../pages/login/login";
 import { LocalWeatherPage } from "../pages/local-weather/local-weather";
 import { Chatea } from "../pages/chatea/chatea";
 import { Contacto } from "../pages/contacto/contacto";
+import { ListaFarmacias } from "../pages/listafarmacias/listafarmacias";
+import { ListaParticulares } from "../pages/listaparticulares/listaparticulares";
+import { Recomendar } from "../pages/recomendar/recomendar";
+import { TurnosConfirmados } from "../pages/t_confirmados/t_confirmados";
 
 export interface MenuItem {
     title: string;
@@ -78,6 +82,18 @@ export class MyApp {
     }
     if(page == 'listaClinicas') {
       this.nav.setRoot(ListaClinicas);
+    }
+    if(page == 'listaFarmacias') {
+      this.nav.setRoot(ListaFarmacias);
+    }
+    if(page == 'listaParticulares') {
+      this.nav.setRoot(ListaParticulares);
+    }
+    if(page == 'TurnosConfirmados') {
+      this.nav.setRoot(TurnosConfirmados);
+    }
+    if(page == 'Recomendar') {
+      this.nav.setRoot(Recomendar);
     }
     if(page == 'Contacto') {
       this.nav.setRoot(Contacto);

@@ -25,8 +25,10 @@ export class DetalleEstablecimiento {
     // set sample data
     this.trips = tripService.getAll();
     this.datos = this.params.get('clinica');
+    this.farmacia = this.params.get('farmacia');
   }
   public datos;
+  public farmacia;
   htmlElement = document.getElementById('map');
   // view trip detail
   launch(){

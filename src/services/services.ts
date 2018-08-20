@@ -107,4 +107,16 @@ export class Servicios {
   getClinicasLista(){
     return this.http.get(this.path + "/climedApp/all",  this.optionsGET);
   }
+
+  getFarmaciasLista(){
+    return this.http.get(this.path + "/farmaciaApp/all",  this.optionsGET);
+  }
+
+  getParticularesLista(){
+    return this.http.get(this.path + "/climedApp/allParticulares",  this.optionsGET);
+  }
+
+  getTConfirmados(){
+    return this.http.get(this.path + "/solicitud/confirmadas/" + this.dni,  this.optionsGET);
+  }
 }

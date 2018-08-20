@@ -14,9 +14,9 @@ import {ActivityService} from "../services/activity-service";
 import {TripService} from "../services/trip-service";
 import {WeatherProvider} from "../services/weather";
 import { Chatea } from '../pages/chatea/chatea';
-
-import {MyApp} from "./app.component";
-
+import { SocialSharing } from '@ionic-native/social-sharing';
+import { MyApp } from "./app.component";
+import { Calendar } from '@ionic-native/calendar';
 import { CallNumber } from '@ionic-native/call-number';
 import { LaunchNavigator, LaunchNavigatorOptions } from '@ionic-native/launch-navigator';
 import { DetalleEstablecimiento } from "../pages/detalleEstablecimiento/detalleEstablecimiento";
@@ -45,6 +45,10 @@ import { Network } from '@ionic-native/network';
 import { NetworkConnectionProvider } from "../providers/network-connection";
 import { ListaClinicas } from "../pages/listaclinicas/listaclinicas";
 import { Contacto } from "../pages/contacto/contacto";
+import { ListaFarmacias } from "../pages/listafarmacias/listafarmacias";
+import { ListaParticulares } from "../pages/listaparticulares/listaparticulares";
+import { Recomendar } from "../pages/recomendar/recomendar";
+import { TurnosConfirmados } from "../pages/t_confirmados/t_confirmados";
 
 // import services
 // end import services
@@ -63,9 +67,13 @@ import { Contacto } from "../pages/contacto/contacto";
     TurnosPendientes,
     Solicitar,
     Clinicas,
+    ListaParticulares,
+    TurnosConfirmados,
     Chatea,
+    ListaFarmacias,
     Contacto,
     Turno,
+    Recomendar,
     ListaClinicas,
     Localidad,
     Especialidad,
@@ -102,12 +110,16 @@ import { Contacto } from "../pages/contacto/contacto";
     TurnosPendientes,
     Solicitar,
     Localidad,
+    Recomendar,
+    ListaParticulares,
     Clinicas,
+    ListaFarmacias,
     ListaClinicas,
     Chatea,
     Especialidad,
     Contacto,
     Turno,
+    TurnosConfirmados,
     LocalWeatherPage,
     NotificationsPage,
     DetalleEstablecimiento,
@@ -124,10 +136,12 @@ import { Contacto } from "../pages/contacto/contacto";
     InAppBrowser,
     Network,
     Keyboard,
+    Calendar,
     FileTransfer,
     CallNumber,
     LaunchNavigator,
     Camera,
+    SocialSharing,
     GoogleMaps,
     Diagnostic,
     NetworkConnectionProvider,

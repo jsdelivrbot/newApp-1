@@ -1,0 +1,52 @@
+<!-- -->
+<ion-header style="background-color: #017ab3 !important;">
+  <ion-navbar style="background-color: #017ab3 !important;" color="azulc">
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>
+      <strong>Recomendar</strong>
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+
+
+<ion-content class="animated fadeIn common-bg">
+
+  <ion-card>
+    <ion-card-content style="text-align: center;">
+      <ion-card-title style="text-align: center;">
+        Datos de contacto
+      </ion-card-title>
+      <ion-item>
+        <ion-icon name="md-person" item-start class="text-azulc"></ion-icon>
+        <ion-input type="text" placeholder="Nombre" style="color: black;"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-icon name="md-finger-print" item-start class="text-azulc"></ion-icon>
+        <ion-input type="text" placeholder="Apellido" style="color: black; border-top: 1px solid black;"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-icon name="md-call" item-start class="text-azulc"></ion-icon>
+        <ion-input type="number" placeholder="Teléfono" style="color: black; border-top: 1px solid black;"></ion-input>
+      </ion-item>
+    </ion-card-content>
+    <button ion-item style="text-align: center;">
+      <ion-icon name="md-send" item-start class="text-azulc"></ion-icon> Enviar Invitación
+    </button>
+  </ion-card>
+
+  <ion-card>
+    <button ion-item (click)="Share()">
+      <ion-row justify-content-center align-items-center>
+        <ion-col col-3>
+          <img src="../assets/img/whatsapp.png" style="width: 50px; height: 50px;">
+        </ion-col>
+        <ion-col col-9 style="font-size: 18px;">
+          Invitar vía Whatsapp
+        </ion-col>
+      </ion-row>
+    </button>
+  </ion-card>
+
+</ion-content>

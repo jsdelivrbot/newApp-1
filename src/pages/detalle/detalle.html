@@ -7,7 +7,7 @@
   </ion-navbar>
 
   <!--  -->
-<!--   <ion-toolbar padding color="primary">
+  <!--   <ion-toolbar padding color="primary">
     <p ion-text no-margin class="text-white">
       Esperando respuesta de cobertec
     </p>
@@ -17,7 +17,27 @@
 
 <ion-content padding class="trips detail-bg">
   <!--list of trips-->
-  <div class="trip card text-azulc" tappable  (click)="viewDetail(trip.id)" margin-bottom>
+
+  <div *ngIf="tipo == 'confirmado'" class="trip card text-azulc" tappable margin-bottom>
+    <div class="background border-bottom" style="padding: 10px;">
+      <strong>{{datos.CLINICA}}</strong>
+      <p>Dirección: {{datos.DIRECCION}}</p>
+      <p>Especialidad: {{datos.ESP}}</p>
+      <ion-row style="text-align: center; font-size: 150%; color: #129e12;">
+        <ion-col col-6>
+          <ion-icon name="md-calendar"></ion-icon> {{datos.FECHAT}}
+        </ion-col>
+        <ion-col col-6>
+          <ion-icon name="clock"></ion-icon> {{datos.HORAT}}
+        </ion-col>
+      </ion-row>
+    </div>
+    <div class="detail-bg" style="color: green; text-align: center;">
+      <button ion-item (click)="guardarCalendario()" style="border: 0px; text-align: center;" class="text-azulc"><ion-icon name="md-calendar" style="color: rgb(119, 13, 13);"></ion-icon> Añadir al Calendario</button>
+    </div>
+  </div>
+
+  <div *ngIf="tipo != 'confirmado'" class="trip card text-azulc" tappable margin-bottom>
     <div class="background border-bottom" style="padding: 10px;">
       <strong>{{datos.CLINICA}}</strong>
       <p>Dirección: {{datos.DIRECCION}}</p>
@@ -29,27 +49,44 @@
       <span ion-text class="text-white">Esperando respuesta de Cobertec</span>
     </div>
     <div class="padding-sm detail-bg" style="color: green;" *ngIf="(datos.FECHAT != null && datos.FECHAT != undefined)">
-      <ion-icon name="calendar"></ion-icon>
+      <ion-icon name="md-calendar"></ion-icon>
       <span ion-text>¡ Ha recibido un turno !</span>
     </div>
   </div>
 
-  <div *ngIf="(datos.FECHAT != null && datos.FECHAT != undefined)" class="trip card text-azulc" tappable  (click)="viewDetail(trip.id)" margin-bottom>
+  <div *ngIf="(datos.FECHAT != null && datos.FECHAT != undefined && tipo != 'confirmado')" class="trip card text-azulc" tappable
+    (click)="viewDetail(trip.id)" margin-bottom>
     <div *ngIf="Servicios.flagLoad == 'off'">
       <div class="padding-sm primary-bg text-white">
         <ion-icon name="md-information-circle"></ion-icon>
-        <span ion-text><strong>Detalle del Turno</strong></span>
-      </div>  
+        <span ion-text>
+          <strong>Detalle del Turno</strong>
+        </span>
+      </div>
       <div class="background border-bottom" style="padding: 10px;">
         <strong>Fecha propuesta:</strong> {{datos.FECHAT}}
-        <p><strong>Hora propuesta:</strong> {{datos.HORAT}}</p>
+        <p>
+          <strong>Hora propuesta:</strong> {{datos.HORAT}}</p>
       </div>
       <button ion-button color="danger" style="border-radius: 10px;  width: 48%;" (click)="rechazarT(datos.IDS)">Rechazar</button>
       <button ion-button color="success" style="border-radius: 10px;  width: 48%;" (click)="confirmarT(datos.IDS)">Confirmar</button>
     </div>
     <div *ngIf="Servicios.flagLoad == 'on'" style="padding: 10px;">
-        <div class="loading-wrapper" style="opacity: 1; transform: scale(1);"><!----><div class="loading-spinner"><ion-spinner class="crescent"><!----><svg viewBox="0 0 64 64" style="animation-duration: 750ms;"><circle transform="translate(32,32)" r="26"></circle></svg><!----></ion-spinner></div><!----><div class="loading-content" style="margin-left: 5px;"> Cargando..</div></div>
-    </div>  
+      <div class="loading-wrapper" style="opacity: 1; transform: scale(1);">
+        <!---->
+        <div class="loading-spinner">
+          <ion-spinner class="crescent">
+            <!---->
+            <svg viewBox="0 0 64 64" style="animation-duration: 750ms;">
+              <circle transform="translate(32,32)" r="26"></circle>
+            </svg>
+            <!---->
+          </ion-spinner>
+        </div>
+        <!---->
+        <div class="loading-content" style="margin-left: 5px;"> Cargando..</div>
+      </div>
+    </div>
   </div>
 
 </ion-content>
