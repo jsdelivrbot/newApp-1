@@ -2,8 +2,6 @@ import { Component } from "@angular/core";
 import { NavController, PopoverController, NavParams, LoadingController, Loading, ToastController, Platform } from "ionic-angular"; 
 import { Storage } from '@ionic/storage'; 
 import { Diagnostic } from '@ionic-native/diagnostic';
-import swal from 'sweetalert2'; 
-import { FileTransfer, FileUploadOptions, FileTransferObject } from '@ionic-native/file-transfer';
 import { NotificationsPage } from "../notifications/notifications"; 
 import { SettingsPage } from "../settings/settings"; 
 import { SearchLocationPage } from "../search-location/search-location"; 
@@ -26,23 +24,15 @@ export class Turno {
   public base64image:any = undefined;
   public Especialidad: any;
   public sugerido: any;
-  constructor(public plt: Platform, private transfer: FileTransfer, public navParams: NavParams, public toastCtrl: ToastController, public Diagnostic: Diagnostic, private camera: Camera, private Servicios: Servicios, private storage: Storage, public nav: NavController, public popoverCtrl: PopoverController) {
+  constructor(public plt: Platform, /* private transfer: FileTransfer, */ public navParams: NavParams, public toastCtrl: ToastController, public Diagnostic: Diagnostic, public camera: Camera, private Servicios: Servicios, private storage: Storage, public nav: NavController, public popoverCtrl: PopoverController) {
     this.Clinica = this.navParams.get('clinica');
     this.Especialidad = this.navParams.get('esp');
     this.tipo = this.navParams.get('tipo');
   }
-  public fileTransfer: FileTransferObject = this.transfer.create();
+  //public fileTransfer: FileTransferObject = this.transfer.create();
 
   ionViewWillEnter() {
 
-  }
-
-  book() {
-    swal(
-      'Good job!',
-      'You clicked the button!',
-      'success'
-    )
   }
 
   // choose place
@@ -99,15 +89,15 @@ export class Turno {
     let d = new Date();
     let tiempo = d.getTime();
     let fileNameInicial = tiempo.toString() + '.jpg';
-    let options: FileUploadOptions = {
+    /* let options: FileUploadOptions = {
       fileKey: "file",
       fileName: fileNameInicial,
       chunkedMode: false,
       mimeType: "image/jpg",
       params: {'directory':'certificados', 'fileName':fileNameInicial}
-  };
+    }; */
  
-   this.fileTransfer.upload(this.base64image, "http://www.gestionarturnos.com/upload.php", options, true)
+   /* this.fileTransfer.upload(this.base64image, "http://www.gestionarturnos.com/upload.php", options, true)
     .then((data) => {
       let datos = {
         IDCLIMED: this.Clinica.IDCLI,
@@ -146,8 +136,67 @@ export class Turno {
         closeButtonText: 'OK',
         showCloseButton: true
       }).present();
-    })
+    }) */
   }
+
+
+
+
+  EnviarEsutdio(){
+    this.Servicios.Loading('on');
+    let d = new Date();
+    let tiempo = d.getTime();
+    let fileNameInicial = tiempo.toString() + '.jpg';
+    /* let options: FileUploadOptions = {
+      fileKey: "file",
+      fileName: fileNameInicial,
+      chunkedMode: false,
+      mimeType: "image/jpg",
+      params: {'directory':'certificados', 'fileName':fileNameInicial}
+    }; */
+ 
+   /* this.fileTransfer.upload(this.base64image, "http://www.gestionarturnos.com/upload.php", options, true)
+    .then((data) => {
+      let datos = {
+        DNISOLICITANTE: localStorage.getItem('CobertecDni'),
+        IDAFILIADO: localStorage.getItem('CobertecNafiliado'),
+        MEDICO: this.sugerido,
+        FOTO: fileNameInicial
+      };
+      this.Servicios.EnviarEstudio(datos)
+      .subscribe(
+        res => {
+          this.Servicios.Loading('off');
+          this.nav.push(TurnosPendientes);
+          let toast = this.toastCtrl.create({
+            message: 'La solicitud ha sido enviada. A la brevedad le enviaremos un turno.',
+            duration: 5000,
+            position: 'middle',
+            cssClass: 'dark-trans',
+            closeButtonText: 'OK',
+            showCloseButton: true
+          });
+          toast.present();
+        },
+        err => {
+          alert('error');
+        }
+      );
+    }, (err) => {
+      this.Servicios.Loading('off');
+      this.toastCtrl.create({
+        message: 'Ocurrió un error al subir la imágen.',
+        duration: 5000,
+        position: 'bottom',
+        cssClass: 'danger',
+        closeButtonText: 'OK',
+        showCloseButton: true
+      }).present();
+    }) */
+  }
+
+
+
 
   TomarFoto() {
     if(this.plt.is('ios')){
@@ -184,7 +233,7 @@ export class Turno {
   tomarFoto2() {
     const options: CameraOptions = {
       quality: 100,
-      destinationType: this.camera.DestinationType.FILE_URI,
+      destinationType: this.camera.DestinationType.DATA_URL,
       sourceType: this.camera.PictureSourceType.CAMERA,
       encodingType: this.camera.EncodingType.JPEG,
       mediaType: this.camera.MediaType.PICTURE
@@ -203,6 +252,7 @@ export class Turno {
     const options: CameraOptions = {
       quality: 100,
       destinationType: this.camera.DestinationType.DATA_URL,
+      sourceType: this.camera.PictureSourceType.CAMERA,
       encodingType: this.camera.EncodingType.JPEG,
       mediaType: this.camera.MediaType.PICTURE
     }
@@ -212,7 +262,7 @@ export class Turno {
       // If it's base64 (DATA_URL):
       this.base64image = 'data:image/jpeg;base64,' + imageData;
     }, (err) => {
-      // Handle error
+      console.log(err);
     });
   }
 

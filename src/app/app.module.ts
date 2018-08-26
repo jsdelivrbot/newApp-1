@@ -5,7 +5,6 @@ import {HttpClientModule} from '@angular/common/http';
 import {HttpModule} from '@angular/http';
 import {IonicStorageModule} from '@ionic/storage';
 import { Servicios } from '../services/services'; 
-import { FileTransfer } from '@ionic-native/file-transfer';
 import {StatusBar} from '@ionic-native/status-bar';
 import {SplashScreen} from '@ionic-native/splash-screen';
 import {Keyboard} from '@ionic-native/keyboard';
@@ -20,7 +19,6 @@ import { Calendar } from '@ionic-native/calendar';
 import { CallNumber } from '@ionic-native/call-number';
 import { LaunchNavigator, LaunchNavigatorOptions } from '@ionic-native/launch-navigator';
 import { DetalleEstablecimiento } from "../pages/detalleEstablecimiento/detalleEstablecimiento";
-import { GoogleMaps } from '@ionic-native/google-maps';
 import {SettingsPage} from "../pages/settings/settings";
 import {CheckoutTripPage} from "../pages/checkout-trip/checkout-trip";
 import {TurnosPendientes} from "../pages/t_pendientes/t_pendientes";
@@ -137,12 +135,10 @@ import { TurnosConfirmados } from "../pages/t_confirmados/t_confirmados";
     Network,
     Keyboard,
     Calendar,
-    FileTransfer,
     CallNumber,
     LaunchNavigator,
     Camera,
     SocialSharing,
-    GoogleMaps,
     Diagnostic,
     NetworkConnectionProvider,
     ActivityService,

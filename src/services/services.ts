@@ -100,6 +100,10 @@ export class Servicios {
     return this.http.post(this.path + "/solicitud/createEspecialidad", Datos, this.optionsPOST);
   }
 
+  EnviarEstudio(Datos){
+    return this.http.post(this.path + "/solicitud/createEstudio", Datos, this.optionsPOST);
+  }
+
   getTEnespera(){
     return this.http.get(this.path + "/solicitud/enespera/" + this.dni,  this.optionsGET);
   }

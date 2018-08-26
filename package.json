@@ -19,25 +19,24 @@
     "@angular/http": "4.4.4",
     "@angular/platform-browser": "4.4.4",
     "@angular/platform-browser-dynamic": "4.4.4",
-    "@ionic-native/calendar": "^4.12.0",
-    "@ionic-native/call-number": "^4.11.0",
+    "@ionic-native/calendar": "^3.14.0",
+    "@ionic-native/call-number": "^3.14.0",
     "@ionic-native/camera": "3.14.0",
-    "@ionic-native/core": "3.12.1",
+    "@ionic-native/core": "^3.12.1",
     "@ionic-native/device": "^4.2.1",
     "@ionic-native/diagnostic": "^3.14.0",
-    "@ionic-native/file-transfer": "^4.11.0",
-    "@ionic-native/google-maps": "^4.9.1",
-    "@ionic-native/in-app-browser": "^4.11.0",
+    "@ionic-native/file-transfer": "",
+    "@ionic-native/in-app-browser": "^3.14.0",
     "@ionic-native/keyboard": "3.14.0",
-    "@ionic-native/launch-navigator": "^4.11.0",
-    "@ionic-native/network": "^4.11.0",
-    "@ionic-native/social-sharing": "^4.12.0",
+    "@ionic-native/launch-navigator": "^3.14.0",
+    "@ionic-native/network": "^3.14.0",
+    "@ionic-native/social-sharing": "^3.14.0",
     "@ionic-native/splash-screen": "3.12.1",
     "@ionic-native/status-bar": "3.12.1",
     "@ionic/storage": "2.0.1",
     "@types/jwt-decode": "^2.2.1",
     "call-number": "^1.0.1",
-    "cordova-android": "~7.0.0",
+    "cordova-android-support-gradle-release": "^1.4.4",
     "cordova-ios": "^4.4.0",
     "cordova-plugin-actionsheet": "^2.3.3",
     "cordova-plugin-calendar": "^5.1.2",
@@ -47,7 +46,7 @@
     "cordova-plugin-dialogs": "^2.0.1",
     "cordova-plugin-file": "^6.0.1",
     "cordova-plugin-file-transfer": "^1.7.1",
-    "cordova-plugin-googlemaps": "^2.3.11",
+    "cordova-plugin-googlemaps": "^2.4.1",
     "cordova-plugin-googlemaps-sdk": "git+https://github.com/mapsplugin/cordova-plugin-googlemaps-sdk.git#2.7.0",
     "cordova-plugin-inappbrowser": "^3.0.0",
     "cordova-plugin-network-information": "^2.0.1",
@@ -65,7 +64,9 @@
     "rxjs": "5.4.3",
     "sw-toolbox": "3.6.0",
     "uk.co.workingedge.phonegap.plugin.launchnavigator": "^4.2.1",
-    "zone.js": "0.8.18"
+    "zone.js": "0.8.18",
+    "mx.ferreyra.callnumber": "~0.0.2",
+    "cordova-android": "~7.0.0"
   },
   "devDependencies": {
     "@ionic/app-scripts": "3.0.1",
@@ -88,14 +89,6 @@
       "cordova-plugin-file-transfer": {},
       "cordova-plugin-network-information": {},
       "cordova-plugin-inappbrowser": {},
-      "cordova-plugin-googlemaps": {
-        "API_KEY_FOR_ANDROID": "AIzaSyAdyvUXw_cr7gmYiO1rUa2HKbOwY6y8HFs",
-        "API_KEY_FOR_IOS": "AIzaSyAdyvUXw_cr7gmYiO1rUa2HKbOwY6y8HFs",
-        "PLAY_SERVICES_VERSION": "15.0.1",
-        "ANDROID_SUPPORT_V4_VERSION": "27.+",
-        "LOCATION_WHEN_IN_USE_DESCRIPTION": "This app wants to get your location while this app runs only.",
-        "LOCATION_ALWAYS_USAGE_DESCRIPTION": "This app wants to get your location always, even this app runs in background."
-      },
       "uk.co.workingedge.phonegap.plugin.launchnavigator": {
         "OKHTTP_VERSION": "3.+",
         "LOCATION_USAGE_DESCRIPTION": "This app requires access to your location for navigation purposes"
@@ -104,6 +97,17 @@
       "cordova-plugin-x-socialsharing": {},
       "cordova-plugin-calendar": {
         "CALENDAR_USAGE_DESCRIPTION": " "
+      },
+      "cordova-android-support-gradle-release": {
+        "ANDROID_SUPPORT_VERSION": "27.+"
+      },
+      "cordova-plugin-googlemaps": {
+        "API_KEY_FOR_ANDROID": "AIzaSyAdyvUXw_cr7gmYiO1rUa2HKbOwY6y8HFs",
+        "API_KEY_FOR_IOS": "AIzaSyAdyvUXw_cr7gmYiO1rUa2HKbOwY6y8HFs",
+        "PLAY_SERVICES_VERSION": "15.0.1",
+        "ANDROID_SUPPORT_V4_VERSION": "27.+",
+        "LOCATION_WHEN_IN_USE_DESCRIPTION": "This app wants to get your location while this app runs only.",
+        "LOCATION_ALWAYS_USAGE_DESCRIPTION": "This app wants to get your location always, even this app runs in background."
       }
     },
     "platforms": [

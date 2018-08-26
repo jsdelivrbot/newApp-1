@@ -3,15 +3,7 @@ import {NavController, NavParams, AlertController, ToastController} from "ionic-
 import {TripService} from "../../services/trip-service";
 import {TripDetailPage} from "../trip-detail/trip-detail";
 import { Servicios } from '../../services/services'; 
-import {
-  GoogleMaps,
-  GoogleMap,
-  GoogleMapsEvent,
-  GoogleMapOptions,
-  CameraPosition,
-  MarkerOptions,
-  Marker
-} from '@ionic-native/google-maps';
+
 import { LaunchNavigator, LaunchNavigatorOptions } from "@ionic-native/launch-navigator";
 @Component({
   selector: 'detalleEstablecimiento',
@@ -20,8 +12,7 @@ import { LaunchNavigator, LaunchNavigatorOptions } from "@ionic-native/launch-na
 export class DetalleEstablecimiento {
   // list of trips
   public trips: any;
-  map: GoogleMap;
-  constructor(private launchNavigator: LaunchNavigator, private googleMaps: GoogleMaps, public alerta:AlertController, public toastCtrl:ToastController, public nav: NavController, public params: NavParams, public tripService: TripService, private Servicios: Servicios) {
+  constructor(private launchNavigator: LaunchNavigator, public alerta:AlertController, public toastCtrl:ToastController, public nav: NavController, public params: NavParams, public tripService: TripService, private Servicios: Servicios) {
     // set sample data
     this.trips = tripService.getAll();
     this.datos = this.params.get('clinica');

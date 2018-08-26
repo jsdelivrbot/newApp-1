@@ -12,6 +12,7 @@ import { Servicios } from '../../services/services';
 import { TurnoPendiente } from '../../modelos/modelos';
 import { Camera, CameraOptions } from '@ionic-native/camera';
 import { DetalleSolicitud } from "../detalle/detalle";
+import { Turno } from "../turno/turno";
 
 @Component({
   selector: 'solicitar',
@@ -47,6 +48,9 @@ export class Solicitar {
     }
     if(tipo == 'especialista'){
       this.nav.push(Especialidad, {tipo: tipo});
+    }
+    if(tipo == 'estudio'){
+      this.nav.push(Turno, {tipo: tipo});
     }
   }
 

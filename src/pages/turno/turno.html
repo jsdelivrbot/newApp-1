@@ -16,7 +16,7 @@
       </button>
     </ion-buttons>
   </ion-navbar>
-  <ion-toolbar style="padding: 20px; text-align: center;" color="azulco">
+  <ion-toolbar *ngIf="tipo != 'estudio'" style="padding: 20px; text-align: center;" color="azulco">
     <p ion-text no-margin class="text-white">
       <strong>{{Clinica.NOMBRE}}</strong>
     </p>
@@ -81,6 +81,47 @@
 
     <div style="text-align: right; padding-top: 20px;">
       <button [disabled]="base64image == undefined || (sugerido == '' || sugerido == null || sugerido == undefined)" ion-button color="azulc" item-right (click)="EnviarEspecialista()">
+        <ion-icon name="send" item-start style="padding-right: 10px;"></ion-icon> Enviar Solicitud
+      </button>
+      <div *ngIf="base64image == undefined || (sugerido == '' || sugerido == null || sugerido == undefined)" style="color: rgb(155, 19, 19);">
+        *Debe completar todos los campos
+      </div>
+    </div>
+    <div style="text-align: center; padding-top: 10px;">
+      <img [src]="base64image" *ngIf="base64image != undefined" height="100px" width="100px">
+    </div>
+  </div>
+
+  <div *ngIf="tipo == 'estudio'" padding>
+    <ion-item class="text-azulc" style="background-color: rgb(243, 243, 243);">
+      <ion-label>
+        <ion-icon name="clock" item-start class="text-azulc"></ion-icon>
+        Rango Horario
+      </ion-label>
+      <ion-select style="color: black;">
+        <ion-option value="f">09hs - 14hs</ion-option>
+        <ion-option value="m">14hs - 18hs</ion-option>
+      </ion-select>
+    </ion-item>
+    <ion-item style="background-color: rgb(243, 243, 243);">
+      <ion-label floating class="text-azulc" style="padding-bottom: 5px;">
+        <ion-icon name="md-person" item-start class="text-azulc"></ion-icon>
+        Clínica Sugerida
+      </ion-label>
+      <ion-input type="text" placeholder="Ingrese el médico sugerido.." style="color: black;" [(ngModel)]="sugerido" name="sugerido"></ion-input>
+    </ion-item>
+    <ion-card style="margin: 0px; width: 100%; margin-top: 20px; padding: 15px;">
+      <strong style="color: black;">Derivación / Autorización</strong>
+      <button style="width: 100%;" ion-button color="azulco" item-right (click)="TomarFoto()">
+        <ion-icon name="md-camera" item-start style="padding-right: 10px;"></ion-icon> Tomar Foto
+      </button>
+      <!-- <button style="width: 100%;" ion-button color="azulco" item-right (click)="SeleccionarFoto()">
+        <ion-icon name="md-camera" item-start style="padding-right: 10px;"></ion-icon> Tomar Foto
+      </button> -->
+    </ion-card>
+
+    <div style="text-align: right; padding-top: 20px;">
+      <button [disabled]="base64image == undefined || (sugerido == '' || sugerido == null || sugerido == undefined)" ion-button color="azulc" item-right (click)="EnviarEstudio()">
         <ion-icon name="send" item-start style="padding-right: 10px;"></ion-icon> Enviar Solicitud
       </button>
       <div *ngIf="base64image == undefined || (sugerido == '' || sugerido == null || sugerido == undefined)" style="color: rgb(155, 19, 19);">
