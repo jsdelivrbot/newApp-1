@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='utf-8'?>
-<widget id="com.vadiun.cobertec" version="0.1.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+<widget id="com.vadiun.cobertec" version="0.1.2" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
     <name>Cobertec</name>
     <description>Aplicacion para solicitar turnos medicos. Prestadora de servicios COBERTEC Salud.</description>
     <author email="contacto@vadiun.com" href="http://www.vadiun.com">Vadiun</author>
@@ -121,7 +121,7 @@
         <variable name="LOCATION_WHEN_IN_USE_DESCRIPTION" value="This app wants to get your location while this app runs only." />
         <variable name="LOCATION_ALWAYS_USAGE_DESCRIPTION" value="This app wants to get your location always, even this app runs in background." />
     </plugin>
+    <plugin name="cordova-plugin-file-transfer" spec="^1.7.1" />
     <engine name="ios" spec="^4.4.0" />
     <engine name="android" spec="~7.0.0" />
-    <plugin name="cordova-plugin-file-transfer" spec="^1.7.1" />
 </widget>

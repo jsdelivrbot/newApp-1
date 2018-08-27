@@ -6,6 +6,7 @@ import {HttpModule} from '@angular/http';
 import {IonicStorageModule} from '@ionic/storage';
 import { Servicios } from '../services/services'; 
 import {StatusBar} from '@ionic-native/status-bar';
+import { FileTransfer } from '@ionic-native/file-transfer';
 import {SplashScreen} from '@ionic-native/splash-screen';
 import {Keyboard} from '@ionic-native/keyboard';
 import { Diagnostic } from '@ionic-native/diagnostic';
@@ -137,6 +138,7 @@ import { TurnosConfirmados } from "../pages/t_confirmados/t_confirmados";
     Calendar,
     CallNumber,
     LaunchNavigator,
+    FileTransfer,
     Camera,
     SocialSharing,
     Diagnostic,

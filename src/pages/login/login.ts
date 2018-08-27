@@ -18,17 +18,19 @@ export class LoginPage {
   public data = {dni: '', nafiliado: ''};
   // go to register page
   register() {
-    this.nav.setRoot(RegisterPage);
+    
   }
 
   // login and go to home page
   login() {
+    this.Servicios.Loading('on');
     var credenciales = {
       'name': this.data.dni,
       'password': this.data.nafiliado
     }
     this.Servicios.loginService(credenciales)
     .subscribe((response : any)=> {
+      this.Servicios.Loading('off');
       var token = JSON.parse(response._body).data.token
       this.Servicios.setLogin(token,credenciales);
       this.nav.setRoot(TurnosPendientes);
