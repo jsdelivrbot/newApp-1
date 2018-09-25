@@ -7,7 +7,9 @@ import { DetalleSolicitud } from '../pages/detalle/detalle';
 @Injectable()
 export class Servicios {
   constructor(public loadingCtrl: LoadingController, private http: Http, public alerta: AlertController, public toastCtrl: ToastController) {
+    // PRODUCTION --> this.path = "https://guarded-oasis-37936.herokuapp.com";
     this.path = "https://guarded-oasis-37936.herokuapp.com";
+    // DEVELOPMENT --> this.path = "http://des.gestionarturnos.com";
     this.HeaderGET = new Headers({ 'Authorization': 'Bearer ' + localStorage.getItem('CobertecToken')});
     this.optionsGET = new RequestOptions({ headers: this.HeaderGET });
     this.HeaderPOST = new Headers({ 
@@ -53,9 +55,17 @@ export class Servicios {
 
   }
 
+  setEmail(ID,email){
+    return this.http.post(this.path + "/afiliado/modificarEmail", {ID:ID,EMAIL:email}, this.optionsPOST);
+  }
+
   setLogin(token,credenciales){
+    var datos:any = JWT(token)
+    console.log(datos)
     localStorage.setItem('CobertecToken', token);
     localStorage.setItem('CobertecLogueado', 'true');
+    localStorage.setItem('CobertecNombreAfiliado', datos.nombre )
+    localStorage.setItem('CobertecIDUser', datos.user_id);
     localStorage.setItem('CobertecDni', credenciales.name);
     localStorage.setItem('CobertecNafiliado', credenciales.password);
     this.path = "https://guarded-oasis-37936.herokuapp.com";
@@ -118,6 +128,10 @@ export class Servicios {
 
   getParticularesLista(){
     return this.http.get(this.path + "/climedApp/allParticulares",  this.optionsGET);
+  }
+
+  getFamiliares(){
+    return this.http.get(this.path + "/solicitud/obtenerFamiliares",  this.optionsGET);
   }
 
   getTConfirmados(){

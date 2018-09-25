@@ -9,6 +9,7 @@ import {StatusBar} from '@ionic-native/status-bar';
 import { FileTransfer } from '@ionic-native/file-transfer';
 import {SplashScreen} from '@ionic-native/splash-screen';
 import {Keyboard} from '@ionic-native/keyboard';
+import { OneSignal } from '@ionic-native/onesignal';
 import { Diagnostic } from '@ionic-native/diagnostic';
 import {ActivityService} from "../services/activity-service";
 import {TripService} from "../services/trip-service";
@@ -137,6 +138,7 @@ import { TurnosConfirmados } from "../pages/t_confirmados/t_confirmados";
     Keyboard,
     Calendar,
     CallNumber,
+    OneSignal,
     LaunchNavigator,
     FileTransfer,
     Camera,

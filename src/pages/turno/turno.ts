@@ -21,6 +21,7 @@ export class Turno {
   // search condition
 
   public Clinica: any;
+  public rango : any;
   public tipo: any;
   public base64image:any = undefined;
   public Especialidad: any;
@@ -33,7 +34,11 @@ export class Turno {
   public fileTransfer: FileTransferObject = this.transfer.create();
 
   ionViewWillEnter() {
-
+    this.Servicios.Loading('on');
+    this.Servicios.getFamiliares()
+    .subscribe(data => {
+      console.log(data)
+    });
   }
 
   // choose place
@@ -60,7 +65,8 @@ export class Turno {
       DNISOLICITANTE: localStorage.getItem('CobertecDni'),
       IDAFILIADO: localStorage.getItem('CobertecNafiliado'),
       MEDICO: this.sugerido,
-      ESPECIALIDAD: this.navParams.get('esp')
+      ESPECIALIDAD: this.navParams.get('esp'),
+      RANGO: this.rango
     };
     this.Servicios.Loading('on');
     this.Servicios.EnviarSolicitud(datos)
@@ -79,6 +85,7 @@ export class Turno {
           toast.present();
         },
         err => {
+          this.Servicios.Loading('off');
           alert('error');
         }
       );
@@ -102,6 +109,7 @@ export class Turno {
     .then((data) => {
       let datos = {
         IDCLIMED: this.Clinica.IDCLI,
+        RANGO: this.rango,
         DNISOLICITANTE: localStorage.getItem('CobertecDni'),
         IDAFILIADO: localStorage.getItem('CobertecNafiliado'),
         MEDICO: this.sugerido,
@@ -112,7 +120,7 @@ export class Turno {
       .subscribe(
         res => {
           this.Servicios.Loading('off');
-          this.nav.push(TurnosPendientes);
+          this.nav.setRoot(TurnosPendientes);
           let toast = this.toastCtrl.create({
             message: 'La solicitud ha sido enviada. A la brevedad le enviaremos un turno.',
             duration: 5000,
@@ -124,6 +132,7 @@ export class Turno {
           toast.present();
         },
         err => {
+          this.Servicios.Loading('off');
           alert('error');
         }
       );
@@ -162,7 +171,8 @@ export class Turno {
         DNISOLICITANTE: localStorage.getItem('CobertecDni'),
         IDAFILIADO: localStorage.getItem('CobertecNafiliado'),
         MEDICO: this.sugerido,
-        FOTO: fileNameInicial
+        FOTO: fileNameInicial,
+        RANGO: this.rango
       };
       this.Servicios.EnviarEstudio(datos)
       .subscribe(
@@ -217,11 +227,8 @@ export class Turno {
                 else {
                   // Permissions not granted
                   // Therefore, create and present toast
-                  this.toastCtrl.create({
-                    message: "Debe permitir acceso a la cámara.",
-                    position: "bottom",
-                    duration: 5000
-                  }).present();
+                  this.tomarFoto2();
+                  
                 }
               });
             }

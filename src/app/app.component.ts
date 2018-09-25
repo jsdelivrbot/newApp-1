@@ -4,7 +4,7 @@ import { Platform, Nav } from "ionic-angular";
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { Keyboard } from '@ionic-native/keyboard';
-
+import { OneSignal } from '@ionic-native/onesignal';
 import { TurnosPendientes } from "../pages/t_pendientes/t_pendientes";
 import { ListaClinicas } from "../pages/listaclinicas/listaclinicas";
 import { Solicitar } from "../pages/solicitar/solicitar";
@@ -34,13 +34,7 @@ export class MyApp {
   rootPage: any = localStorage.getItem('CobertecLogueado') == 'true' ? Solicitar : LoginPage;
 
   appMenuItems: Array<MenuItem>;
-
-  constructor(
-    public platform: Platform,
-    public statusBar: StatusBar,
-    public splashScreen: SplashScreen,
-    public keyboard: Keyboard
-  ) {
+  constructor(public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen, public keyboard: Keyboard, private oneSignal: OneSignal) {
     this.initializeApp();
 
     this.appMenuItems = [
@@ -50,10 +44,21 @@ export class MyApp {
   }
 
   public nafiliado = localStorage.getItem('CobertecNafiliado');
+  public NombreAfiliado = localStorage.getItem('CobertecNombreAfiliado');
+  
+
 
   initializeApp() {
     this.platform.ready().then(() => {
       // Okay, so the platform is ready and our plugins are available.
+
+
+
+      // OneSignal Code start:
+    // Enable to debug issues:
+    // window["plugins"].OneSignal.setLogLevel({logLevel: 4, visualLevel: 4});
+
+
 
       //*** Control Splash Screen
       // this.splashScreen.show();

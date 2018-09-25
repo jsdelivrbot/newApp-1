@@ -4,6 +4,7 @@ import {HomePage} from "../home/home";
 import {RegisterPage} from "../register/register";
 import { Servicios } from '../../services/services'; 
 import { TurnosPendientes } from "../t_pendientes/t_pendientes";
+import * as JWT from 'jwt-decode';
 
 @Component({
   selector: 'page-login',
@@ -29,14 +30,71 @@ export class LoginPage {
       'password': this.data.nafiliado
     }
     this.Servicios.loginService(credenciales)
-    .subscribe((response : any)=> {
+    .subscribe((response : any) => {
       this.Servicios.Loading('off');
       var token = JSON.parse(response._body).data.token
-      this.Servicios.setLogin(token,credenciales);
-      this.nav.setRoot(TurnosPendientes);
+      var abierto:any = JWT(token)
+      if(abierto.email == '' || abierto.email == null){
+        let alerta = this.forgotCtrl.create({
+          title: 'Ingrese su email',
+          message: "Para utilizar la aplicación debe ingresar su email",
+          inputs: [
+            {
+              name: 'email',
+              id: 'autofocu',
+              placeholder: 'Email..',
+              type: 'text'
+            },
+          ],
+          buttons: [
+            {
+              text: 'Cancelar',
+              handler: data => {
+                console.log('Cancel clicked');
+              }
+            },
+            {
+              text: 'Aceptar',
+              handler: data => {
+                this.Servicios.Loading('on');
+                this.Servicios.setEmail(abierto.user_id,data.email)
+                .subscribe(
+                  res => {
+                    this.Servicios.Loading('off');
+                    this.Servicios.setLogin(token,credenciales);
+                    this.nav.setRoot(TurnosPendientes);
+                  },
+                  err => {
+                    this.Servicios.Loading('off');
+                    alert('error');
+                  }
+                );
+                
+              }
+            }
+          ]
+        });
+        alerta.present()
+        .then(() => {
+          document.getElementById('autofocu').focus();
+        })
+      }else{
+        this.Servicios.setLogin(token,credenciales);
+        this.nav.setRoot(TurnosPendientes);
+      }
+     }, (err) => {
+      this.Servicios.Loading('off');
+      let alert = this.forgotCtrl.create({
+        title: 'Erro al iniciar sesión',
+        subTitle: 'Revise los datos e intente nuevamente',
+        buttons: ['Aceptar']
+      });
+      alert.present();
      });;
     
   }
+
+
 
   forgotPass() {
     let forgot = this.forgotCtrl.create({
