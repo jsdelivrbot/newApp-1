@@ -1,9 +1,3 @@
-TO MODIFY:
-
-- En turno clínico y especialista, agregar que envíe el rango horario elegido.
-- Pedir que joaquin envie el nombre del afiliado en el token.
-
-
 TO DO:
 
 - En el create de las solicitudes, tengo que añadir un desplegable que me muestre los familiares, y enviar
@@ -17,4 +11,4 @@ con la key 'OBSFAMILIAR' un texto que diga 'La solicitud es para el familiar: $N
 GESTIONARTURNOS:
 - Agregar la posibilidad de ver los datos de los familiares en la solicitud.
 - Agregar el rango horario en la solicitud.
-- Mostrar el campo OBS en la solicitud.
+- Mostrar el campo OBSFAMILIAR en la solicitud.

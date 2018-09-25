@@ -57,7 +57,7 @@ export class LoginPage {
               text: 'Aceptar',
               handler: data => {
                 this.Servicios.Loading('on');
-                this.Servicios.setEmail(abierto.user_id,data.email)
+                this.Servicios.setEmail(credenciales.name,data.email)
                 .subscribe(
                   res => {
                     this.Servicios.Loading('off');

@@ -55,8 +55,8 @@ export class Servicios {
 
   }
 
-  setEmail(ID,email){
-    return this.http.post(this.path + "/afiliado/modificarEmail", {ID:ID,EMAIL:email}, this.optionsPOST);
+  setEmail(DNI,email){
+    return this.http.post(this.path + "/afiliado/modificarEmail", {DNI:DNI,EMAIL:email}, this.optionsPOST);
   }
 
   setLogin(token,credenciales){
