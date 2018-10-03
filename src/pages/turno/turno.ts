@@ -11,6 +11,7 @@ import { FileTransfer, FileTransferObject, FileUploadOptions } from '@ionic-nati
 import { Camera, CameraOptions } from '@ionic-native/camera'; 
 import { DetalleSolicitud } from "../detalle/detalle"; 
 import { TurnosPendientes } from "../t_pendientes/t_pendientes";
+import { Solicitar } from "../solicitar/solicitar";
 
 @Component({
   selector: 'turno',
@@ -23,6 +24,9 @@ export class Turno {
   public Clinica: any;
   public rango : any;
   public tipo: any;
+  public myname:any;
+  public famselected : any;
+  public familiares : any = [];
   public base64image:any = undefined;
   public Especialidad: any;
   public sugerido: any;
@@ -34,11 +38,23 @@ export class Turno {
   public fileTransfer: FileTransferObject = this.transfer.create();
 
   ionViewWillEnter() {
+    this.myname = localStorage.getItem('CobertecNombreAfiliado');
     this.Servicios.Loading('on');
     this.Servicios.getFamiliares()
-    .subscribe(data => {
-      console.log(data)
+    .subscribe(res => {
+      var res2 : any = res;
+      var respuesta : any = JSON.parse(res2._body);
+      this.Servicios.Loading('off');
+      for(var i = 0; i < respuesta.length; i++){
+      var array = [];
+      array.push(respuesta[i].nombre)
+      }
+    },
+    err => {
+      this.Servicios.Loading('off')
     });
+    this.familiares = JSON.parse(localStorage.getItem('Familiares'));
+    //chequear que este
   }
 
   // choose place
@@ -73,7 +89,7 @@ export class Turno {
       .subscribe(
         res => {
           this.Servicios.Loading('off');
-          this.nav.push(TurnosPendientes);
+          this.nav.setRoot(TurnosPendientes);
           let toast = this.toastCtrl.create({
             message: 'La solicitud ha sido enviada. A la brevedad le enviaremos un turno.',
             duration: 5000,
@@ -86,7 +102,7 @@ export class Turno {
         },
         err => {
           this.Servicios.Loading('off');
-          alert('error');
+          alert('Ha ocurrido un error');
         }
       );
     //{'IDCLIMED':clinica,'DNISOLICITANTE':dni,'IDAFILIADO':carnet,'MEDICO':sugerido,'ESPECIALIDAD':40}
@@ -149,7 +165,13 @@ export class Turno {
     })
   }
 
+  Mostrar(){
+    alert(this.famselected)
+  }
 
+  Cancelar(){
+    this.nav.setRoot(Solicitar);
+  }
 
 
   EnviarEsutdio(){
@@ -178,7 +200,7 @@ export class Turno {
       .subscribe(
         res => {
           this.Servicios.Loading('off');
-          this.nav.push(TurnosPendientes);
+          this.nav.setRoot(TurnosPendientes);
           let toast = this.toastCtrl.create({
             message: 'La solicitud ha sido enviada. A la brevedad le enviaremos un turno.',
             duration: 5000,

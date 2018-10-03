@@ -60,13 +60,26 @@ export class LoginPage {
                 this.Servicios.setEmail(credenciales.name,data.email)
                 .subscribe(
                   res => {
-                    this.Servicios.Loading('off');
-                    this.Servicios.setLogin(token,credenciales);
-                    this.nav.setRoot(TurnosPendientes);
+                    this.Servicios.getFamiliares()
+                    .subscribe(res => {
+                      var res2 : any = res;
+                      var respuesta : any = JSON.parse(res2._body);
+                      for(var i = 0; i < respuesta.length; i++){
+                        var array = [];
+                        array.push(respuesta[i].nombre)
+                      }
+                      localStorage.setItem('Familiares',JSON.stringify(array));
+                      this.Servicios.Loading('off');
+                      this.Servicios.setLogin(token,credenciales);
+                      this.nav.setRoot(TurnosPendientes);
+                    },
+                    err => {
+                      this.Servicios.Loading('off');
+                    });
                   },
                   err => {
                     this.Servicios.Loading('off');
-                    alert('error');
+                    alert('Ha ocurrido un error.');
                   }
                 );
                 

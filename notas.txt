@@ -3,7 +3,6 @@ TO DO:
 - En el create de las solicitudes, tengo que añadir un desplegable que me muestre los familiares, y enviar
 con la key 'OBSFAMILIAR' un texto que diga 'La solicitud es para el familiar: $NOMBRE FAMILIAR$' si selecciono un familiar.
     Los familiares se obtienen pegandole a 'solicitud/obtenerFamiliares'
-- Solucionar lo de la foto.
 
 
 

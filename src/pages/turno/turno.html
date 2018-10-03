@@ -8,11 +8,8 @@
       <strong>Detalles de Solicitud</strong>
     </ion-title>
     <ion-buttons end>
-      <button ion-button tappable (click)="presentNotifications($event)">
-        <ion-icon name="notifications"></ion-icon>
-      </button>
-      <button ion-button tappable (click)="goToAccount()">
-        <ion-icon name="cog"></ion-icon>
+      <button ion-button (click)="Cancelar()">
+        Cancelar
       </button>
     </ion-buttons>
   </ion-navbar>
@@ -44,11 +41,24 @@
         <ion-icon name="md-person" item-start class="text-azulc"></ion-icon>
         Médico Sugerido
       </ion-label>
-      <ion-input type="text" placeholder="Ingrese el médico sugerido.." style="color: black;" [(ngModel)]="sugerido" name="sugerido"></ion-input>
+      <ion-input type="text" placeholder="Ingrese el médico sugerido.." style="color: black;" [(ngModel)]="sugerido"
+        name="sugerido"></ion-input>
+    </ion-item>
+    <ion-item class="text-azulc" style="background-color: rgb(243, 243, 243);">
+      <ion-label>
+        <ion-icon name="md-person" item-start class="text-azulc"></ion-icon>
+        Afiliado
+      </ion-label>
+      <ion-select [(ngModel)]="famselected" style="color: black;">
+        <ion-option value="ninguno" default selected>{{myname}}</ion-option>
+        <ion-option *ngFor="let fam of familiares" value="{{fam}}">{{fam}}</ion-option>
+      </ion-select>
     </ion-item>
     <div style="text-align: right; padding-top: 20px;">
-      <button ion-button color="azulc" item-right (click)="EnviarSolicitud()">
-        <ion-icon name="send" item-start style="padding-right: 10px;"></ion-icon> Enviar Solicitud</button>
+      <button [disabled]="famselected == undefined || (sugerido == '' || sugerido == null || sugerido == undefined) || rango == undefined"
+        ion-button color="azulc" item-right (click)="EnviarSolicitud()">
+        <ion-icon name="send" item-start style="padding-right: 10px;"></ion-icon> Enviar Solicitud
+      </button>
     </div>
   </div>
   <div *ngIf="tipo == 'especialista'" padding>
@@ -67,7 +77,18 @@
         <ion-icon name="md-person" item-start class="text-azulc"></ion-icon>
         Médico Sugerido
       </ion-label>
-      <ion-input type="text" placeholder="Ingrese el médico sugerido.." style="color: black;" [(ngModel)]="sugerido" name="sugerido"></ion-input>
+      <ion-input type="text" placeholder="Ingrese el médico sugerido.." style="color: black;" [(ngModel)]="sugerido"
+        name="sugerido"></ion-input>
+    </ion-item>
+    <ion-item class="text-azulc" style="background-color: rgb(243, 243, 243);">
+      <ion-label>
+        <ion-icon name="md-person" item-start class="text-azulc"></ion-icon>
+        Afiliado
+      </ion-label>
+      <ion-select [(ngModel)]="famselected" style="color: black;">
+        <ion-option value="ninguno" default selected>{{myname}}</ion-option>
+        <ion-option *ngFor="let fam of familiares" value="{{fam}}">{{fam}}</ion-option>
+      </ion-select>
     </ion-item>
     <ion-card style="margin: 0px; width: 100%; margin-top: 20px; padding: 15px;">
       <strong style="color: black;">Derivación / Autorización</strong>
@@ -80,7 +101,8 @@
     </ion-card>
 
     <div style="text-align: right; padding-top: 20px;">
-      <button [disabled]="base64image == undefined || (sugerido == '' || sugerido == null || sugerido == undefined)" ion-button color="azulc" item-right (click)="EnviarEspecialista()">
+      <button [disabled]="base64image == undefined || (sugerido == '' || sugerido == null || sugerido == undefined || rango == undefined || famselected == undefined)"
+        ion-button color="azulc" item-right (click)="EnviarEspecialista()">
         <ion-icon name="send" item-start style="padding-right: 10px;"></ion-icon> Enviar Solicitud
       </button>
       <div *ngIf="base64image == undefined || (sugerido == '' || sugerido == null || sugerido == undefined)" style="color: rgb(155, 19, 19);">
@@ -108,7 +130,18 @@
         <ion-icon name="md-person" item-start class="text-azulc"></ion-icon>
         Clínica Sugerida
       </ion-label>
-      <ion-input type="text" placeholder="Ingrese el médico sugerido.." style="color: black;" [(ngModel)]="sugerido" name="sugerido"></ion-input>
+      <ion-input type="text" placeholder="Ingrese el médico sugerido.." style="color: black;" [(ngModel)]="sugerido"
+        name="sugerido"></ion-input>
+    </ion-item>
+    <ion-item class="text-azulc" style="background-color: rgb(243, 243, 243);">
+      <ion-label>
+        <ion-icon name="md-person" item-start class="text-azulc"></ion-icon>
+        Afiliado
+      </ion-label>
+      <ion-select [(ngModel)]="famselected" style="color: black;">
+        <ion-option value="ninguno" default selected>{{myname}}</ion-option>
+        <ion-option *ngFor="let fam of familiares" value="{{fam}}">{{fam}}</ion-option>
+      </ion-select>
     </ion-item>
     <ion-card style="margin: 0px; width: 100%; margin-top: 20px; padding: 15px;">
       <strong style="color: black;">Derivación / Autorización</strong>
@@ -121,7 +154,8 @@
     </ion-card>
 
     <div style="text-align: right; padding-top: 20px;">
-      <button [disabled]="base64image == undefined || (sugerido == '' || sugerido == null || sugerido == undefined)" ion-button color="azulc" item-right (click)="EnviarEstudio()">
+      <button [disabled]="base64image == undefined || (sugerido == '' || sugerido == null || sugerido == undefined || rango == undefined || famselected == undefined)"
+        ion-button color="azulc" item-right (click)="EnviarEstudio()">
         <ion-icon name="send" item-start style="padding-right: 10px;"></ion-icon> Enviar Solicitud
       </button>
       <div *ngIf="base64image == undefined || (sugerido == '' || sugerido == null || sugerido == undefined)" style="color: rgb(155, 19, 19);">
