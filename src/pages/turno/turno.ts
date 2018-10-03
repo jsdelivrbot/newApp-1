@@ -39,21 +39,8 @@ export class Turno {
 
   ionViewWillEnter() {
     this.myname = localStorage.getItem('CobertecNombreAfiliado');
-    this.Servicios.Loading('on');
-    this.Servicios.getFamiliares()
-    .subscribe(res => {
-      var res2 : any = res;
-      var respuesta : any = JSON.parse(res2._body);
-      this.Servicios.Loading('off');
-      for(var i = 0; i < respuesta.length; i++){
-      var array = [];
-      array.push(respuesta[i].nombre)
-      }
-    },
-    err => {
-      this.Servicios.Loading('off')
-    });
     this.familiares = JSON.parse(localStorage.getItem('Familiares'));
+    console.log(this.familiares)
     //chequear que este
   }
 
@@ -82,7 +69,8 @@ export class Turno {
       IDAFILIADO: localStorage.getItem('CobertecNafiliado'),
       MEDICO: this.sugerido,
       ESPECIALIDAD: this.navParams.get('esp'),
-      RANGO: this.rango
+      RANGO: this.rango,
+      OBSFAMILIAR: this.famselected != 'ninguno' ? 'El turno ha sido solicitado para el familiar ' + this.famselected : null
     };
     this.Servicios.Loading('on');
     this.Servicios.EnviarSolicitud(datos)

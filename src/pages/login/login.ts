@@ -31,7 +31,6 @@ export class LoginPage {
     }
     this.Servicios.loginService(credenciales)
     .subscribe((response : any) => {
-      this.Servicios.Loading('off');
       var token = JSON.parse(response._body).data.token
       var abierto:any = JWT(token)
       if(abierto.email == '' || abierto.email == null){
@@ -56,16 +55,15 @@ export class LoginPage {
             {
               text: 'Aceptar',
               handler: data => {
-                this.Servicios.Loading('on');
                 this.Servicios.setEmail(credenciales.name,data.email)
                 .subscribe(
                   res => {
                     this.Servicios.getFamiliares()
                     .subscribe(res => {
                       var res2 : any = res;
+                      var array = [];
                       var respuesta : any = JSON.parse(res2._body);
                       for(var i = 0; i < respuesta.length; i++){
-                        var array = [];
                         array.push(respuesta[i].nombre)
                       }
                       localStorage.setItem('Familiares',JSON.stringify(array));
@@ -92,8 +90,22 @@ export class LoginPage {
           document.getElementById('autofocu').focus();
         })
       }else{
-        this.Servicios.setLogin(token,credenciales);
-        this.nav.setRoot(TurnosPendientes);
+        this.Servicios.getFamiliares()
+                    .subscribe(res => {
+                      var res2 : any = res;
+                      var array = [];
+                      var respuesta : any = JSON.parse(res2._body);
+                      for(var i = 0; i < respuesta.length; i++){
+                        array.push(respuesta[i].nombre)
+                      }
+                      localStorage.setItem('Familiares',JSON.stringify(array));
+                      this.Servicios.Loading('off');
+                      this.Servicios.setLogin(token,credenciales);
+                      this.nav.setRoot(TurnosPendientes);
+                    },
+                    err => {
+                      this.Servicios.Loading('off');
+                    });
       }
      }, (err) => {
       this.Servicios.Loading('off');
