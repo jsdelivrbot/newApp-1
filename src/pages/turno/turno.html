@@ -55,7 +55,7 @@
       </ion-select>
     </ion-item>
     <div style="text-align: right; padding-top: 20px;">
-      <button [disabled]="famselected == undefined || (sugerido == '' || sugerido == null || sugerido == undefined) || rango == undefined"
+      <button [disabled]="famselected == undefined || rango == undefined"
         ion-button color="azulc" item-right (click)="EnviarSolicitud()">
         <ion-icon name="send" item-start style="padding-right: 10px;"></ion-icon> Enviar Solicitud
       </button>
@@ -101,7 +101,7 @@
     </ion-card>
 
     <div style="text-align: right; padding-top: 20px;">
-      <button [disabled]="base64image == undefined || (sugerido == '' || sugerido == null || sugerido == undefined || rango == undefined || famselected == undefined)"
+      <button [disabled]="base64image == undefined || (rango == undefined || famselected == undefined)"
         ion-button color="azulc" item-right (click)="EnviarEspecialista()">
         <ion-icon name="send" item-start style="padding-right: 10px;"></ion-icon> Enviar Solicitud
       </button>
@@ -154,7 +154,7 @@
     </ion-card>
 
     <div style="text-align: right; padding-top: 20px;">
-      <button [disabled]="base64image == undefined || (sugerido == '' || sugerido == null || sugerido == undefined || rango == undefined || famselected == undefined)"
+      <button [disabled]="base64image == undefined || (rango == undefined || famselected == undefined)"
         ion-button color="azulc" item-right (click)="EnviarEstudio()">
         <ion-icon name="send" item-start style="padding-right: 10px;"></ion-icon> Enviar Solicitud
       </button>

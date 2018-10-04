@@ -162,7 +162,7 @@ export class Turno {
   }
 
 
-  EnviarEsutdio(){
+  EnviarEstudio(){
     this.Servicios.Loading('on');
     let d = new Date();
     let tiempo = d.getTime();

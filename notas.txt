@@ -1,7 +1,6 @@
 TO DO:
 
 
-
 GESTIONARTURNOS:
 - Agregar la posibilidad de ver los datos de los familiares en la solicitud.
 - Agregar el rango horario en la solicitud.

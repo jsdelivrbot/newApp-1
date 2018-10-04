@@ -90,8 +90,10 @@ export class LoginPage {
           document.getElementById('autofocu').focus();
         })
       }else{
+        this.Servicios.setLogin(token,credenciales);
         this.Servicios.getFamiliares()
                     .subscribe(res => {
+                      
                       var res2 : any = res;
                       var array = [];
                       var respuesta : any = JSON.parse(res2._body);
@@ -104,6 +106,7 @@ export class LoginPage {
                       this.nav.setRoot(TurnosPendientes);
                     },
                     err => {
+                      console.log(JSON.stringify(err))
                       this.Servicios.Loading('off');
                     });
       }

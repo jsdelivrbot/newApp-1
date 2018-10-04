@@ -68,6 +68,7 @@ export class Servicios {
     localStorage.setItem('CobertecIDUser', datos.user_id);
     localStorage.setItem('CobertecDni', credenciales.name);
     localStorage.setItem('CobertecNafiliado', credenciales.password);
+    this.dni = localStorage.getItem('CobertecDni');
     this.path = "https://guarded-oasis-37936.herokuapp.com";
     this.HeaderGET = new Headers({ 'Authorization': 'Bearer ' + localStorage.getItem('CobertecToken')});
     this.optionsGET = new RequestOptions({ headers: this.HeaderGET });
