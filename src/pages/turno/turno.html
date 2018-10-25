@@ -15,17 +15,16 @@
   </ion-navbar>
   <ion-toolbar *ngIf="tipo != 'estudio'" style="padding: 20px; text-align: center;" color="azulco">
     <p ion-text no-margin class="text-white">
-      <strong>{{Clinica.NOMBRE}}</strong>
+      <strong>Solicitud de Acceso Directo</strong>
     </p>
     <p>
-      <ion-icon name="md-pin" style="color: rgb(173, 22, 22);"></ion-icon>
-      <span ion-text color="light">{{Clinica.DIRECCION}}</span>
+      <span ion-text color="light">Complete los datos a continuación</span>
     </p>
   </ion-toolbar>
 </ion-header>
 
 <ion-content class="animated fadeIn common-bg">
-  <div *ngIf="tipo == 'clinico'" padding>
+  <div *ngIf="tipo == 'accesoDirecto'" padding>
     <ion-item class="text-azulc" style="background-color: rgb(243, 243, 243);">
       <ion-label>
         <ion-icon name="clock" item-start class="text-azulc"></ion-icon>
@@ -37,16 +36,16 @@
       </ion-select>
     </ion-item>
     <ion-item style="background-color: rgb(243, 243, 243);">
-      <ion-label floating class="text-azulc" style="padding-bottom: 5px;">
+      <ion-label floating class="text-azulc" style="">
         <ion-icon name="md-person" item-start class="text-azulc"></ion-icon>
         Médico Sugerido
       </ion-label>
-      <ion-input type="text" placeholder="Ingrese el médico sugerido.." style="color: black;" [(ngModel)]="sugerido"
+      <ion-input type="text" placeholder="" style="color: black;" [(ngModel)]="sugerido"
         name="sugerido"></ion-input>
     </ion-item>
     <ion-item class="text-azulc" style="background-color: rgb(243, 243, 243);">
       <ion-label>
-        <ion-icon name="md-person" item-start class="text-azulc"></ion-icon>
+        <ion-icon name="md-card" item-start class="text-azulc"></ion-icon>
         Afiliado
       </ion-label>
       <ion-select [(ngModel)]="famselected" style="color: black;">
@@ -54,13 +53,25 @@
         <ion-option *ngFor="let fam of familiares" value="{{fam}}">{{fam}}</ion-option>
       </ion-select>
     </ion-item>
+
+    <ion-item class="text-azulc" style="background-color: rgb(243, 243, 243);">
+      <ion-label style="font-size: 10pt;">
+        <ion-icon name="md-medkit" item-start class="text-azulc"></ion-icon>
+        Preferencia Prestador
+      </ion-label>
+      <ion-select [(ngModel)]="Clinica" style="color: black;">
+        <ion-option value="ninguno" default selected disabled>Seleccione</ion-option>
+        <ion-option *ngFor="let clinica of clinicas" value="{{clinica.IDCLI}}">{{clinica.NOMBRE}}</ion-option>
+      </ion-select>
+    </ion-item>
     <div style="text-align: right; padding-top: 20px;">
-      <button [disabled]="famselected == undefined || rango == undefined"
+      <button [disabled]="famselected == undefined || rango == undefined || Clinica == 'ninguno' || Clinica == undefined"
         ion-button color="azulc" item-right (click)="EnviarSolicitud()">
         <ion-icon name="send" item-start style="padding-right: 10px;"></ion-icon> Enviar Solicitud
       </button>
     </div>
   </div>
+
   <div *ngIf="tipo == 'especialista'" padding>
     <ion-item class="text-azulc" style="background-color: rgb(243, 243, 243);">
       <ion-label>

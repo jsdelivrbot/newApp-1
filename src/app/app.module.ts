@@ -49,6 +49,8 @@ import { ListaFarmacias } from "../pages/listafarmacias/listafarmacias";
 import { ListaParticulares } from "../pages/listaparticulares/listaparticulares";
 import { Recomendar } from "../pages/recomendar/recomendar";
 import { TurnosConfirmados } from "../pages/t_confirmados/t_confirmados";
+import { Deeplinks } from "@ionic-native/deeplinks"
+import { TurnosRechazados } from "../pages/t_rechazados/t_rechazados";
 
 // import services
 // end import services
@@ -69,6 +71,7 @@ import { TurnosConfirmados } from "../pages/t_confirmados/t_confirmados";
     Clinicas,
     ListaParticulares,
     TurnosConfirmados,
+    TurnosRechazados,
     Chatea,
     ListaFarmacias,
     Contacto,
@@ -115,6 +118,7 @@ import { TurnosConfirmados } from "../pages/t_confirmados/t_confirmados";
     Clinicas,
     ListaFarmacias,
     ListaClinicas,
+    TurnosRechazados,
     Chatea,
     Especialidad,
     Contacto,
@@ -137,6 +141,7 @@ import { TurnosConfirmados } from "../pages/t_confirmados/t_confirmados";
     Network,
     Keyboard,
     Calendar,
+    Deeplinks,
     CallNumber,
     OneSignal,
     LaunchNavigator,

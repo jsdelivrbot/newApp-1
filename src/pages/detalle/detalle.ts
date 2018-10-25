@@ -4,6 +4,7 @@ import {TripService} from "../../services/trip-service";
 import {TripDetailPage} from "../trip-detail/trip-detail";
 import { Servicios } from '../../services/services'; 
 import { Calendar } from '@ionic-native/calendar';
+import { Solicitar } from "../solicitar/solicitar";
 
 
 @Component({
@@ -30,6 +31,10 @@ export class DetalleSolicitud {
   }
   viewDetail(id) {
     this.nav.push(TripDetailPage, {id: id});
+  }
+
+  NuevoTurno(){
+    this.nav.setRoot(Solicitar)
   }
 
   guardarCalendario(){

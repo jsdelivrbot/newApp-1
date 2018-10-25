@@ -30,13 +30,23 @@ export class Especialidad {
 
   ionViewWillEnter() {
     this.Servicios.Loading('on');
-    this.Servicios.getEspecialidades()
-    .subscribe(data => {
-      this.Servicios.Loading('off');
-      var response1 : any = data;
-      this.especialidades = JSON.parse(response1._body);
-      this.especialidadesFiltradas = JSON.parse(response1._body);
-    });
+    if(this.tipo == 'accesoDirecto'){
+      this.Servicios.getEspecialidadesAccesoDirecto()
+        .subscribe(data => {
+          this.Servicios.Loading('off');
+          var response1: any = data;
+          this.especialidades = JSON.parse(response1._body);
+          this.especialidadesFiltradas = JSON.parse(response1._body);
+        });
+    }else{
+      this.Servicios.getEspecialidades()
+      .subscribe(data => {
+        this.Servicios.Loading('off');
+        var response1 : any = data;
+        this.especialidades = JSON.parse(response1._body);
+        this.especialidadesFiltradas = JSON.parse(response1._body);
+      });
+    }
   }
 
   Filtrado(columna,datitos) : Array<any>{

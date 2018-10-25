@@ -1,4 +1,4 @@
-import { Component, ViewChild } from "@angular/core";
+import { Component, ViewChild, AfterViewInit } from "@angular/core";
 import { Platform, Nav } from "ionic-angular";
 
 import { StatusBar } from '@ionic-native/status-bar';
@@ -17,6 +17,8 @@ import { ListaFarmacias } from "../pages/listafarmacias/listafarmacias";
 import { ListaParticulares } from "../pages/listaparticulares/listaparticulares";
 import { Recomendar } from "../pages/recomendar/recomendar";
 import { TurnosConfirmados } from "../pages/t_confirmados/t_confirmados";
+import { Deeplinks } from "@ionic-native/deeplinks";
+import { TurnosRechazados } from "../pages/t_rechazados/t_rechazados";
 
 export interface MenuItem {
     title: string;
@@ -34,7 +36,7 @@ export class MyApp {
   rootPage: any = localStorage.getItem('CobertecLogueado') == 'true' ? Solicitar : LoginPage;
 
   appMenuItems: Array<MenuItem>;
-  constructor(public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen, public keyboard: Keyboard, private oneSignal: OneSignal) {
+  constructor(private deeplinks: Deeplinks, public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen, public keyboard: Keyboard, private oneSignal: OneSignal) {
     this.initializeApp();
 
     this.appMenuItems = [
@@ -47,11 +49,32 @@ export class MyApp {
   public NombreAfiliado = localStorage.getItem('CobertecNombreAfiliado');
   
 
+  AfterViewInit(){
+    this.deeplinks.routeWithNavController(this.nav, {
+      '/confirmados': TurnosConfirmados
+    }).subscribe(match => {
+        // match.$route - the route we matched, which is the matched entry from the arguments to route()
+        // match.$args - the args passed in the link
+        // match.$link - the full link data
+        alert('matched')
+      }, nomatch => {
+        
+      });
+  }
 
   initializeApp() {
     this.platform.ready().then(() => {
       // Okay, so the platform is ready and our plugins are available.
+      this.deeplinks.routeWithNavController(this.nav, {
+        '/confirmados': TurnosConfirmados
+      }).subscribe(match => {
+          // match.$route - the route we matched, which is the matched entry from the arguments to route()
+          // match.$args - the args passed in the link
+          // match.$link - the full link data
+          this.nav.setRoot(TurnosPendientes);
+        }, nomatch => {
 
+        });
 
 
       // OneSignal Code start:
@@ -96,6 +119,9 @@ export class MyApp {
     }
     if(page == 'TurnosConfirmados') {
       this.nav.setRoot(TurnosConfirmados);
+    }
+    if(page == 'TurnosRechazados') {
+      this.nav.setRoot(TurnosRechazados);
     }
     if(page == 'Recomendar') {
       this.nav.setRoot(Recomendar);

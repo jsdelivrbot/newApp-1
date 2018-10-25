@@ -30,8 +30,9 @@ export class Turno {
   public base64image:any = undefined;
   public Especialidad: any;
   public sugerido: any;
+  public clinicas: any;
   constructor(public plt: Platform, private transfer: FileTransfer, public navParams: NavParams, public toastCtrl: ToastController, public Diagnostic: Diagnostic, public camera: Camera, private Servicios: Servicios, private storage: Storage, public nav: NavController, public popoverCtrl: PopoverController) {
-    this.Clinica = this.navParams.get('clinica');
+    //this.Clinica = this.navParams.get('clinica');
     this.Especialidad = this.navParams.get('esp');
     this.tipo = this.navParams.get('tipo');
   }
@@ -41,6 +42,15 @@ export class Turno {
     this.myname = localStorage.getItem('CobertecNombreAfiliado');
     this.familiares = JSON.parse(localStorage.getItem('Familiares'));
     console.log(this.familiares)
+    this.Servicios.Loading('on');
+    this.Servicios.getClinicas(this.navParams.get('localidad'),this.navParams.get('esp'))
+    .subscribe(data => {
+      this.Servicios.Loading('off');
+      var response1 : any = data;
+      this.clinicas = JSON.parse(response1._body);
+    }, err => {
+      this.Servicios.Loading('off');
+    });
     //chequear que este
   }
 
@@ -64,7 +74,7 @@ export class Turno {
 
   EnviarSolicitud() {
     let datos = {
-      IDCLIMED: this.Clinica.IDCLI,
+      IDCLIMED: this.Clinica,
       DNISOLICITANTE: localStorage.getItem('CobertecDni'),
       IDAFILIADO: localStorage.getItem('CobertecNafiliado'),
       MEDICO: this.sugerido,
@@ -118,7 +128,8 @@ export class Turno {
         IDAFILIADO: localStorage.getItem('CobertecNafiliado'),
         MEDICO: this.sugerido,
         ESPECIALIDAD: this.navParams.get('esp'),
-        FOTO: fileNameInicial
+        FOTO: fileNameInicial,
+        OBSFAMILIAR: this.famselected != 'ninguno' ? 'La autorización ha sido solicitada para el familiar ' + this.famselected : null
       };
       this.Servicios.EnviarEspecialista(datos)
       .subscribe(
@@ -182,7 +193,8 @@ export class Turno {
         IDAFILIADO: localStorage.getItem('CobertecNafiliado'),
         MEDICO: this.sugerido,
         FOTO: fileNameInicial,
-        RANGO: this.rango
+        RANGO: this.rango,
+        OBSFAMILIAR: this.famselected != 'ninguno' ? 'La autorización ha sido solicitada para el familiar ' + this.famselected : null
       };
       this.Servicios.EnviarEstudio(datos)
       .subscribe(
@@ -190,7 +202,7 @@ export class Turno {
           this.Servicios.Loading('off');
           this.nav.setRoot(TurnosPendientes);
           let toast = this.toastCtrl.create({
-            message: 'La solicitud ha sido enviada. A la brevedad le enviaremos un turno.',
+            message: 'La solicitud de autorización será respondida en el lapso de 72 hs. hábiles',
             duration: 5000,
             position: 'middle',
             cssClass: 'dark-trans',
@@ -200,7 +212,15 @@ export class Turno {
           toast.present();
         },
         err => {
-          alert('error');
+          this.Servicios.Loading('off');
+          this.toastCtrl.create({
+            message: 'Ocurrió un error al enviar la solicitud.',
+            duration: 5000,
+            position: 'bottom',
+            cssClass: 'danger',
+            closeButtonText: 'OK',
+            showCloseButton: true
+          }).present();
         }
       );
     }, (err) => {

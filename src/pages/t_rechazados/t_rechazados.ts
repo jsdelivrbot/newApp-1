@@ -1,57 +1,53 @@
 import {Component} from "@angular/core";
-import {NavController, PopoverController, LoadingController, Loading, ToastController} from "ionic-angular";
+import {NavController, PopoverController, LoadingController, Loading, ToastController, Platform, AlertController} from "ionic-angular";
 import {Storage} from '@ionic/storage';
 import { Diagnostic } from '@ionic-native/diagnostic';
 
 import {NotificationsPage} from "../notifications/notifications";
 import {SettingsPage} from "../settings/settings";
-import { Localidad } from "../localidad/localidad";
-import { Especialidad } from "../especialidad/especialidad";
+import { TripsPage } from "../trips/trips";
 import {SearchLocationPage} from "../search-location/search-location";
 import { Servicios } from '../../services/services'; 
 import { TurnoPendiente } from '../../modelos/modelos';
 import { Camera, CameraOptions } from '@ionic-native/camera';
 import { DetalleSolicitud } from "../detalle/detalle";
-import { Turno } from "../turno/turno";
 
 @Component({
-  selector: 'solicitar',
-  templateUrl: 'solicitar.html'
+  selector: 't_rechazados',
+  templateUrl: 't_rechazados.html'
 })
 
-export class Solicitar {
+export class TurnosRechazados {
   // search condition
-  public t_pendientes :  TurnoPendiente;
-  public t_enespera : any;
-
+  public t_confirmados :  TurnoPendiente;
   constructor(public toastCtrl:ToastController, public Diagnostic : Diagnostic, private camera: Camera, private Servicios: Servicios, private storage: Storage, public nav: NavController, public popoverCtrl: PopoverController) {
   }
 
   ionViewWillEnter() {
-/*     this.Servicios.Loading('on');
-    this.Servicios.getTEnespera()
+    this.Servicios.Loading('on');
+    this.Servicios.getTRechazados()
     .subscribe(data => {
       var response1 : any = data;
-      this.t_enespera = JSON.parse(response1._body);
-      this.Servicios.getTPendientes()
-      .subscribe(data2 => {
-        var response : any = data2;
-          this.t_pendientes = JSON.parse(response._body);
-          this.Servicios.Loading('off');
-      });
-    }); */
+      this.t_confirmados = JSON.parse(response1._body);
+      this.Servicios.Loading('off');
+    });
   }
-  // go to result page
-  popup(tipo) {
-    if(tipo == 'accesoDirecto'){
-      this.nav.push(Especialidad, {tipo: tipo});
-    }
-    if(tipo == 'especialista'){
-      this.nav.push(Especialidad, {tipo: tipo});
-    }
-    if(tipo == 'estudio'){
-      this.nav.push(Turno, {tipo: tipo});
-    }
+
+  detallar(datos){
+    this.nav.push(DetalleSolicitud,{datos:datos, tipo:'rechazado'});
+  }
+
+  
+
+  doRefresh(refresher){
+    this.Servicios.Loading('on');
+    this.Servicios.getTConfirmados()
+    .subscribe(data => {
+      refresher.complete();
+      var response1 : any = data;
+      this.t_confirmados = JSON.parse(response1._body);
+      this.Servicios.Loading('off');
+    });
   }
 
   // to go account page
@@ -66,8 +62,6 @@ export class Solicitar {
       ev: myEvent
     });
   }
-
-  
 
 }
 

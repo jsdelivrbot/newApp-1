@@ -33,11 +33,38 @@
       </ion-row>
     </div>
     <div class="detail-bg" style="color: green; text-align: center;">
-      <button ion-item (click)="guardarCalendario()" style="border: 0px; text-align: center;" class="text-azulc"><ion-icon name="md-calendar" style="color: rgb(119, 13, 13);"></ion-icon> Añadir al Calendario</button>
+      <button ion-item (click)="guardarCalendario()" style="border: 0px; text-align: center;" class="text-azulc">
+        <ion-icon name="md-calendar" style="color: rgb(119, 13, 13);"></ion-icon> Añadir al Calendario
+      </button>
     </div>
   </div>
 
-  <div *ngIf="tipo != 'confirmado'" class="trip card text-azulc" tappable margin-bottom>
+  <div *ngIf="tipo == 'rechazado'">
+    <div class="trip card text-azulc" tappable margin-bottom>
+      <div class="background border-bottom" style="padding: 10px;">
+        Su solicitud para <strong>{{datos.CLINICA}}</strong> ha sido rechazada por Cobertec.
+      </div>
+      <div class="detail-bg" style="text-align: center; padding: 5px;">
+        <ion-icon name="ios-information-circle-outline"></ion-icon> <b>Motivo del rechazo:</b> {{datos.MOTIVO}}
+      </div>
+    </div>
+
+    <ion-card>
+      <button ion-item (click)="NuevoTurno()">
+        <ion-row justify-content-center align-items-center>
+          <ion-col col-3>
+            <ion-icon name="md-calendar"></ion-icon>
+          </ion-col>
+          <ion-col col-9 style="font-size: 18px;">
+            Solicitar un nuevo turno
+          </ion-col>
+        </ion-row>
+      </button>
+    </ion-card>
+
+  </div>
+
+  <div *ngIf="tipo != 'confirmado' && tipo != 'rechazado'" class="trip card text-azulc" tappable margin-bottom>
     <div class="background border-bottom" style="padding: 10px;">
       <strong>{{datos.CLINICA}}</strong>
       <p>Dirección: {{datos.DIRECCION}}</p>
@@ -54,8 +81,8 @@
     </div>
   </div>
 
-  <div *ngIf="(datos.FECHAT != null && datos.FECHAT != undefined && tipo != 'confirmado')" class="trip card text-azulc" tappable
-    (click)="viewDetail(trip.id)" margin-bottom>
+  <div *ngIf="(datos.FECHAT != null && datos.FECHAT != undefined && tipo != 'confirmado')" class="trip card text-azulc"
+    tappable (click)="viewDetail(trip.id)" margin-bottom>
     <div *ngIf="Servicios.flagLoad == 'off'">
       <div class="padding-sm primary-bg text-white">
         <ion-icon name="md-information-circle"></ion-icon>

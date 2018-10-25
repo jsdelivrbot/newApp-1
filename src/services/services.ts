@@ -91,6 +91,10 @@ export class Servicios {
     return this.http.get(this.path + "/especialidadApp/all",  this.optionsGET);
   }
 
+  getEspecialidadesAccesoDirecto(){
+    return this.http.get(this.path + "/especialidadApp/allDirecto",  this.optionsGET);
+  }
+
   getClinicas(localidad,esp){
     return this.http.post(this.path + "/climedApp/clinicasPorEspecialidadYLocalidad", {localidad: localidad, especialidad: esp}, this.optionsPOST);
   }
@@ -137,5 +141,8 @@ export class Servicios {
 
   getTConfirmados(){
     return this.http.get(this.path + "/solicitud/confirmadas/" + this.dni,  this.optionsGET);
+  }
+  getTRechazados(){
+    return this.http.get(this.path + "/solicitud/rechazadas/" + this.dni,  this.optionsGET);
   }
 }

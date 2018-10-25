@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='utf-8'?>
-<widget id="com.vadiun.cobertec" version="0.1.6" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+<widget id="com.vadiun.cobertec" version="0.1.7" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
     <name>Cobertec</name>
     <description>Aplicacion para solicitar turnos medicos. Prestadora de servicios COBERTEC Salud.</description>
     <author email="contacto@vadiun.com" href="http://www.vadiun.com">Vadiun</author>
@@ -114,6 +114,24 @@
     <plugin name="phonegap-plugin-push" spec="^2.1.3">
         <variable name="SENDER_ID" value="1033171026895" />
         <variable name="FCM_VERSION" value="11.6.2" />
+    </plugin>
+    <plugin name="ionic-plugin-deeplinks" spec="~1.0.17">
+        <variable name="URL_SCHEME" value="Cobertec" />
+        <variable name="DEEPLINK_SCHEME" value="https" />
+        <variable name="DEEPLINK_HOST" value="cobertec.com" />
+        <variable name="ANDROID_PATH_PREFIX" value="/" />
+        <variable name="ANDROID_2_PATH_PREFIX" value="/" />
+        <variable name="ANDROID_3_PATH_PREFIX" value="/" />
+        <variable name="ANDROID_4_PATH_PREFIX" value="/" />
+        <variable name="ANDROID_5_PATH_PREFIX" value="/" />
+        <variable name="DEEPLINK_2_SCHEME" value=" " />
+        <variable name="DEEPLINK_2_HOST" value=" " />
+        <variable name="DEEPLINK_3_SCHEME" value=" " />
+        <variable name="DEEPLINK_3_HOST" value=" " />
+        <variable name="DEEPLINK_4_SCHEME" value=" " />
+        <variable name="DEEPLINK_4_HOST" value=" " />
+        <variable name="DEEPLINK_5_SCHEME" value=" " />
+        <variable name="DEEPLINK_5_HOST" value=" " />
     </plugin>
     <engine name="android" spec="~7.0.0" />
     <engine name="ios" spec="~4.5.5" />

@@ -11,6 +11,7 @@ import { Servicios } from '../../services/services';
 import { TurnoPendiente } from '../../modelos/modelos';
 import { Camera, CameraOptions } from '@ionic-native/camera';
 import { DetalleSolicitud } from "../detalle/detalle";
+import { Turno } from "../turno/turno";
 
 @Component({
   selector: 'localidad',
@@ -59,7 +60,7 @@ Filtrar(){
 
   // go to result page
   goClinicas(localidad) {
-    this.nav.push(Clinicas,{localidad: localidad, esp: this.navParams.get('esp'), tipo: this.tipo});
+    this.nav.push(Turno,{localidad: localidad, esp: this.navParams.get('esp'), tipo: this.tipo});
   }
 
   // choose place
