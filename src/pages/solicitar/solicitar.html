@@ -11,9 +11,7 @@
 </ion-header>
 
 <ion-content padding class="animated fadeIn common-bg">
-    <button ion-button (click)="SweetAlert()" >
-        Click
-      </button>
+    
   <ion-card (click)="popup('accesoDirecto')" no-margin margin-bottom class="full-width">
     <ion-item tappable class="border-bottom">
       <ion-row justify-content-center align-items-center>
@@ -26,19 +24,6 @@
       </ion-row>
     </ion-item>
   </ion-card>
-  <ion-card (click)="popup('especialista')" no-margin margin-bottom class="full-width">
-    <ion-item tappable class="border-bottom">
-      <ion-row justify-content-center align-items-center>
-        <ion-col col-8>
-            <p><strong class="text-azulc" style="font-size: 20px;">Especialista</strong></p>
-            <p style="color: rgb(214, 92, 11); padding-top: 5px;">Requiere autorización</p>
-        </ion-col>
-        <ion-col col-4>
-            <img src="assets/img/especialista.png" style="width: 75px; height: 75px;">
-        </ion-col>
-      </ion-row>
-    </ion-item>
-  </ion-card>
   <ion-card (click)="popup('estudio')" no-margin margin-bottom class="full-width">
     <ion-item tappable class="border-bottom">
       <ion-row justify-content-center align-items-center>
@@ -46,8 +31,7 @@
           <img src="assets/img/estudio.png" style="width: 75px; height: 75px;">
         </ion-col>
         <ion-col col-8>
-          <p><strong class="text-azulc" style="font-size: 20px;">Estudio</strong></p>
-          <p style="color: rgb(214, 92, 11); padding-top: 5px;">Requiere autorización</p>
+          <p style="word-wrap: break-word;"><strong class="text-azulc" style="font-size: 20px; word-wrap: break-word;">Envío de Autorización</strong></p>
         </ion-col>
       </ion-row>
     </ion-item>

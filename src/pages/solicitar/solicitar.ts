@@ -14,6 +14,7 @@ import { Camera, CameraOptions } from '@ionic-native/camera';
 import { DetalleSolicitud } from "../detalle/detalle";
 import { Turno } from "../turno/turno";
 
+
 @Component({
   selector: 'solicitar',
   templateUrl: 'solicitar.html'
@@ -41,6 +42,9 @@ export class Solicitar {
       });
     }); */
   }
+
+  
+
   // go to result page
   popup(tipo) {
     if(tipo == 'accesoDirecto'){

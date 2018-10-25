@@ -1,17 +1,55 @@
-import { Component } from "@angular/core"; 
-import { NavController, PopoverController, NavParams, LoadingController, Loading, ToastController, Platform } from "ionic-angular"; 
-import { Storage } from '@ionic/storage'; 
-import { Diagnostic } from '@ionic-native/diagnostic';
-import { NotificationsPage } from "../notifications/notifications"; 
-import { SettingsPage } from "../settings/settings"; 
-import { SearchLocationPage } from "../search-location/search-location"; 
-import { Servicios } from '../../services/services'; 
-import { TurnoPendiente } from '../../modelos/modelos'; 
-import { FileTransfer, FileTransferObject, FileUploadOptions } from '@ionic-native/file-transfer';
-import { Camera, CameraOptions } from '@ionic-native/camera'; 
-import { DetalleSolicitud } from "../detalle/detalle"; 
-import { TurnosPendientes } from "../t_pendientes/t_pendientes";
-import { Solicitar } from "../solicitar/solicitar";
+import {
+  Component
+} from "@angular/core";
+import {
+  NavController,
+  PopoverController,
+  NavParams,
+  LoadingController,
+  Loading,
+  ToastController,
+  Platform
+} from "ionic-angular";
+import {
+  Storage
+} from '@ionic/storage';
+import {
+  Diagnostic
+} from '@ionic-native/diagnostic';
+import {
+  NotificationsPage
+} from "../notifications/notifications";
+import {
+  SettingsPage
+} from "../settings/settings";
+import {
+  SearchLocationPage
+} from "../search-location/search-location";
+import {
+  Servicios
+} from '../../services/services';
+import {
+  TurnoPendiente
+} from '../../modelos/modelos';
+import {
+  FileTransfer,
+  FileTransferObject,
+  FileUploadOptions
+} from '@ionic-native/file-transfer';
+import {
+  Camera,
+  CameraOptions
+} from '@ionic-native/camera';
+import {
+  DetalleSolicitud
+} from "../detalle/detalle";
+import {
+  TurnosPendientes
+} from "../t_pendientes/t_pendientes";
+import {
+  Solicitar
+} from "../solicitar/solicitar";
+import swal from 'sweetalert';
 
 @Component({
   selector: 'turno',
@@ -22,12 +60,12 @@ export class Turno {
   // search condition
 
   public Clinica: any;
-  public rango : any;
+  public rango: any;
   public tipo: any;
-  public myname:any;
-  public famselected : any;
-  public familiares : any = [];
-  public base64image:any = undefined;
+  public myname: any;
+  public famselected: any;
+  public familiares: any = [];
+  public base64image: any = undefined;
   public Especialidad: any;
   public sugerido: any;
   public clinicas: any;
@@ -43,14 +81,26 @@ export class Turno {
     this.familiares = JSON.parse(localStorage.getItem('Familiares'));
     console.log(this.familiares)
     this.Servicios.Loading('on');
-    this.Servicios.getClinicas(this.navParams.get('localidad'),this.navParams.get('esp'))
-    .subscribe(data => {
-      this.Servicios.Loading('off');
-      var response1 : any = data;
-      this.clinicas = JSON.parse(response1._body);
-    }, err => {
-      this.Servicios.Loading('off');
-    });
+    if (this.tipo == 'estudio') {
+      this.Servicios.getClinicasLista()
+        .subscribe(data => {
+          this.Servicios.Loading('off');
+          var response1: any = data;
+          this.clinicas = JSON.parse(response1._body);
+        }, err => {
+          this.Servicios.Loading('off');
+        });
+    } else {
+      this.Servicios.getClinicas(this.navParams.get('localidad'), this.navParams.get('esp'))
+        .subscribe(data => {
+          this.Servicios.Loading('off');
+          var response1: any = data;
+          this.clinicas = JSON.parse(response1._body);
+        }, err => {
+          this.Servicios.Loading('off');
+        });
+    }
+
     //chequear que este
   }
 
@@ -88,15 +138,7 @@ export class Turno {
         res => {
           this.Servicios.Loading('off');
           this.nav.setRoot(TurnosPendientes);
-          let toast = this.toastCtrl.create({
-            message: 'La solicitud ha sido enviada. A la brevedad le enviaremos un turno.',
-            duration: 5000,
-            position: 'middle',
-            cssClass: 'dark-trans',
-            closeButtonText: 'OK',
-            showCloseButton: true
-          });
-          toast.present();
+          swal("¡Perfecto!", "Su solicitud fue enviada correctamente, a la brevedad le asignaremos un turno.", "success");
         },
         err => {
           this.Servicios.Loading('off');
@@ -106,7 +148,7 @@ export class Turno {
     //{'IDCLIMED':clinica,'DNISOLICITANTE':dni,'IDAFILIADO':carnet,'MEDICO':sugerido,'ESPECIALIDAD':40}
   }
 
-  EnviarEspecialista(){
+  EnviarEspecialista() {
     this.Servicios.Loading('on');
     let d = new Date();
     let tiempo = d.getTime();
@@ -116,64 +158,67 @@ export class Turno {
       fileName: fileNameInicial,
       chunkedMode: false,
       mimeType: "image/jpg",
-      params: {'directory':'certificados', 'fileName':fileNameInicial}
+      params: {
+        'directory': 'certificados',
+        'fileName': fileNameInicial
+      }
     };
- 
-   this.fileTransfer.upload(this.base64image, "http://www.gestionarturnos.com/upload.php", options, true)
-    .then((data) => {
-      let datos = {
-        IDCLIMED: this.Clinica.IDCLI,
-        RANGO: this.rango,
-        DNISOLICITANTE: localStorage.getItem('CobertecDni'),
-        IDAFILIADO: localStorage.getItem('CobertecNafiliado'),
-        MEDICO: this.sugerido,
-        ESPECIALIDAD: this.navParams.get('esp'),
-        FOTO: fileNameInicial,
-        OBSFAMILIAR: this.famselected != 'ninguno' ? 'La autorización ha sido solicitada para el familiar ' + this.famselected : null
-      };
-      this.Servicios.EnviarEspecialista(datos)
-      .subscribe(
-        res => {
-          this.Servicios.Loading('off');
-          this.nav.setRoot(TurnosPendientes);
-          let toast = this.toastCtrl.create({
-            message: 'La solicitud ha sido enviada. A la brevedad le enviaremos un turno.',
-            duration: 5000,
-            position: 'middle',
-            cssClass: 'dark-trans',
-            closeButtonText: 'OK',
-            showCloseButton: true
-          });
-          toast.present();
-        },
-        err => {
-          this.Servicios.Loading('off');
-          alert('error');
-        }
-      );
-    }, (err) => {
-      this.Servicios.Loading('off');
-      this.toastCtrl.create({
-        message: 'Ocurrió un error al subir la imágen.',
-        duration: 5000,
-        position: 'bottom',
-        cssClass: 'danger',
-        closeButtonText: 'OK',
-        showCloseButton: true
-      }).present();
-    })
+
+    this.fileTransfer.upload(this.base64image, "http://www.gestionarturnos.com/upload.php", options, true)
+      .then((data) => {
+        let datos = {
+          IDCLIMED: this.Clinica.IDCLI,
+          RANGO: this.rango,
+          DNISOLICITANTE: localStorage.getItem('CobertecDni'),
+          IDAFILIADO: localStorage.getItem('CobertecNafiliado'),
+          MEDICO: this.sugerido,
+          ESPECIALIDAD: this.navParams.get('esp'),
+          FOTO: fileNameInicial,
+          OBSFAMILIAR: this.famselected != 'ninguno' ? 'La autorización ha sido solicitada para el familiar ' + this.famselected : null
+        };
+        this.Servicios.EnviarEspecialista(datos)
+          .subscribe(
+            res => {
+              this.Servicios.Loading('off');
+              this.nav.setRoot(TurnosPendientes);
+              let toast = this.toastCtrl.create({
+                message: 'La solicitud ha sido enviada. A la brevedad le enviaremos un turno.',
+                duration: 5000,
+                position: 'middle',
+                cssClass: 'dark-trans',
+                closeButtonText: 'OK',
+                showCloseButton: true
+              });
+              toast.present();
+            },
+            err => {
+              this.Servicios.Loading('off');
+              alert('error');
+            }
+          );
+      }, (err) => {
+        this.Servicios.Loading('off');
+        this.toastCtrl.create({
+          message: 'Ocurrió un error al subir la imágen.',
+          duration: 5000,
+          position: 'bottom',
+          cssClass: 'danger',
+          closeButtonText: 'OK',
+          showCloseButton: true
+        }).present();
+      })
   }
 
-  Mostrar(){
+  Mostrar() {
     alert(this.famselected)
   }
 
-  Cancelar(){
+  Cancelar() {
     this.nav.setRoot(Solicitar);
   }
 
 
-  EnviarEstudio(){
+  EnviarEstudio() {
     this.Servicios.Loading('on');
     let d = new Date();
     let tiempo = d.getTime();
@@ -183,66 +228,61 @@ export class Turno {
       fileName: fileNameInicial,
       chunkedMode: false,
       mimeType: "image/jpg",
-      params: {'directory':'certificados', 'fileName':fileNameInicial}
+      params: {
+        'directory': 'certificados',
+        'fileName': fileNameInicial
+      }
     };
- 
-   this.fileTransfer.upload(this.base64image, "http://www.gestionarturnos.com/upload.php", options, true)
-    .then((data) => {
-      let datos = {
-        DNISOLICITANTE: localStorage.getItem('CobertecDni'),
-        IDAFILIADO: localStorage.getItem('CobertecNafiliado'),
-        MEDICO: this.sugerido,
-        FOTO: fileNameInicial,
-        RANGO: this.rango,
-        OBSFAMILIAR: this.famselected != 'ninguno' ? 'La autorización ha sido solicitada para el familiar ' + this.famselected : null
-      };
-      this.Servicios.EnviarEstudio(datos)
-      .subscribe(
-        res => {
-          this.Servicios.Loading('off');
-          this.nav.setRoot(TurnosPendientes);
-          let toast = this.toastCtrl.create({
-            message: 'La solicitud de autorización será respondida en el lapso de 72 hs. hábiles',
-            duration: 5000,
-            position: 'middle',
-            cssClass: 'dark-trans',
-            closeButtonText: 'OK',
-            showCloseButton: true
-          });
-          toast.present();
-        },
-        err => {
-          this.Servicios.Loading('off');
-          this.toastCtrl.create({
-            message: 'Ocurrió un error al enviar la solicitud.',
-            duration: 5000,
-            position: 'bottom',
-            cssClass: 'danger',
-            closeButtonText: 'OK',
-            showCloseButton: true
-          }).present();
-        }
-      );
-    }, (err) => {
-      this.Servicios.Loading('off');
-      this.toastCtrl.create({
-        message: 'Ocurrió un error al subir la imágen.',
-        duration: 5000,
-        position: 'bottom',
-        cssClass: 'danger',
-        closeButtonText: 'OK',
-        showCloseButton: true
-      }).present();
-    }) 
+
+    this.fileTransfer.upload(this.base64image, "http://www.gestionarturnos.com/upload.php", options, true)
+      .then((data) => {
+        let datos = {
+          DNISOLICITANTE: localStorage.getItem('CobertecDni'),
+          IDAFILIADO: localStorage.getItem('CobertecNafiliado'),
+          MEDICO: this.sugerido,
+          FOTO: fileNameInicial,
+          RANGO: this.rango,
+          OBSFAMILIAR: this.famselected != 'ninguno' ? 'La autorización ha sido solicitada para el familiar ' + this.famselected : null
+        };
+        this.Servicios.EnviarEstudio(datos)
+          .subscribe(
+            res => {
+              this.Servicios.Loading('off');
+              this.nav.setRoot(TurnosPendientes);
+              swal("¡Perfecto!", "Su solicitud fue enviada correctamente. La misma será respondida en el lapso de 72hs hábiles", "success");
+            },
+            err => {
+              this.Servicios.Loading('off');
+              this.toastCtrl.create({
+                message: 'Ocurrió un error al enviar la solicitud.',
+                duration: 5000,
+                position: 'bottom',
+                cssClass: 'danger',
+                closeButtonText: 'OK',
+                showCloseButton: true
+              }).present();
+            }
+          );
+      }, (err) => {
+        this.Servicios.Loading('off');
+        this.toastCtrl.create({
+          message: 'Ocurrió un error al subir la imágen.',
+          duration: 5000,
+          position: 'bottom',
+          cssClass: 'danger',
+          closeButtonText: 'OK',
+          showCloseButton: true
+        }).present();
+      })
   }
 
 
 
 
   TomarFoto() {
-    if(this.plt.is('ios')){
+    if (this.plt.is('ios')) {
       this.SeleccionarFoto();
-    }else{
+    } else {
       this.Diagnostic.requestCameraAuthorization().then((status) => {
         if (status == this.Diagnostic.permissionStatus.GRANTED)
           this.tomarFoto2();
@@ -258,7 +298,7 @@ export class Turno {
                   // Permissions not granted
                   // Therefore, create and present toast
                   this.tomarFoto2();
-                  
+
                 }
               });
             }

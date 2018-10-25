@@ -23,6 +23,7 @@
       <strong>{{datos.CLINICA}}</strong>
       <p>Dirección: {{datos.DIRECCION}}</p>
       <p>Especialidad: {{datos.ESP}}</p>
+      <p>Observaciones: {{datos.OBS}}</p> 
       <ion-row style="text-align: center; font-size: 150%; color: #129e12;">
         <ion-col col-6>
           <ion-icon name="md-calendar"></ion-icon> {{datos.FECHAT | date:'dd/MM/yyyy'}}
@@ -93,7 +94,9 @@
       <div class="background border-bottom" style="padding: 10px;">
         <strong>Fecha propuesta:</strong> {{datos.FECHAT | date:'dd/MM/yyyy'}}
         <p>
-          <strong>Hora propuesta:</strong> {{datos.HORAT}}</p>
+          <strong>Hora propuesta:</strong> {{datos.HORAT}}
+        </p>
+          <strong>Observaciones:</strong> {{datos.OBS}}
       </div>
       <button ion-button color="danger" style="border-radius: 10px;  width: 48%;" (click)="rechazarT(datos.IDS)">Rechazar</button>
       <button ion-button color="success" style="border-radius: 10px;  width: 48%;" (click)="confirmarT(datos.IDS)">Confirmar</button>
